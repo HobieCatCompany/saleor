@@ -591,6 +591,7 @@ RAZORPAY = "razorpay"
 STRIPE = "stripe"
 
 CHECKOUT_PAYMENT_GATEWAYS = {
+    STRIPE: pgettext_lazy("Payment method name", "Credit Card"),
     DUMMY: pgettext_lazy("Payment method name", "Dummy gateway")
 }
 
@@ -662,3 +663,8 @@ GRAPHENE = {
     "RELAY_CONNECTION_ENFORCE_FIRST_OR_LAST": True,
     "RELAY_CONNECTION_MAX_LIMIT": 100,
 }
+
+# Hobie Settings Below
+CSRF_COOKIE_PATH = '/shop/'
+LANGUAGE_COOKIE_PATH = '/shop/'
+SESSION_COOKIE_PATH = '/shop/'

@@ -27,7 +27,7 @@
 
   {% include 'favicon.html' %}
   {% render_bundle 'storefront' 'css' attrs='async' %}
-
+  <link type="text/css" href="{{ STATIC_URL }}/assets/hobie/assets/hobie.css" rel="stylesheet" async/>
   {% block stylesheet %}{% endblock stylesheet %}
 
   {% block meta_tags %}

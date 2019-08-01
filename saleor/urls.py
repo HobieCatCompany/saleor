@@ -23,31 +23,32 @@ from .search.urls import urlpatterns as search_urls
 handler404 = "saleor.core.views.handle_404"
 
 non_translatable_urlpatterns = [
-    url(r"^dashboard/", include((dashboard_urls, "dashboard"), namespace="dashboard")),
-    url(r"^graphql/", csrf_exempt(GraphQLView.as_view(schema=schema)), name="api"),
+    url(r"^shop/dashboard/", include((dashboard_urls, "dashboard"), namespace="dashboard")),
+    url(r"^shop/graphql/", csrf_exempt(GraphQLView.as_view(schema=schema)), name="api"),
     url(
-        r"^sitemap\.xml$",
+        r"^shop/sitemap\.xml$",
         sitemap,
         {"sitemaps": sitemaps},
         name="django.contrib.sitemaps.views.sitemap",
     ),
-    url(r"^i18n/$", set_language, name="set_language"),
+    url(r"^shop/i18n/$", set_language, name="set_language"),
     url("", include("social_django.urls", namespace="social")),
 ]
 
 translatable_urlpatterns = [
-    url(r"^", include(core_urls)),
-    url(r"^checkout/", include((checkout_urls, "checkout"), namespace="checkout")),
-    url(r"^jsi18n/$", JavaScriptCatalog.as_view(), name="javascript-catalog"),
-    url(r"^order/", include((order_urls, "order"), namespace="order")),
-    url(r"^page/", include((page_urls, "page"), namespace="page")),
-    url(r"^products/", include((product_urls, "product"), namespace="product")),
-    url(r"^account/", include((account_urls, "account"), namespace="account")),
-    url(r"^feeds/", include((feed_urls, "data_feeds"), namespace="data_feeds")),
-    url(r"^search/", include((search_urls, "search"), namespace="search")),
+    url(r"^shop/", include(core_urls)),
+    url(r"^shop/checkout/", include((checkout_urls, "checkout"), namespace="checkout")),
+    url(r"^shop/jsi18n/$", JavaScriptCatalog.as_view(), name="javascript-catalog"),
+    url(r"^shop/order/", include((order_urls, "order"), namespace="order")),
+    url(r"^shop/page/", include((page_urls, "page"), namespace="page")),
+    url(r"^shop/products/", include((product_urls, "product"), namespace="product")),
+    url(r"^shop/account/", include((account_urls, "account"), namespace="account")),
+    url(r"^shop/feeds/", include((feed_urls, "data_feeds"), namespace="data_feeds")),
+    url(r"^shop/search/", include((search_urls, "search"), namespace="search")),
 ]
 
-urlpatterns = non_translatable_urlpatterns + i18n_patterns(*translatable_urlpatterns)
+#urlpatterns = non_translatable_urlpatterns + i18n_patterns(*translatable_urlpatterns)
+urlpatterns = non_translatable_urlpatterns + translatable_urlpatterns
 
 if settings.DEBUG:
     import debug_toolbar

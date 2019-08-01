@@ -9,6 +9,7 @@ services:
       - ./saleor/:/app/saleor:Z
       - ./templates/:/app/templates:Z
       - ./tests/:/app/tests
+      - ./saleor/hobie/assets/:/app/saleor/static/assets/hobie/assets/
       # prevents overshadowing of build-time assets
       - /app/saleor/static/assets
       - /app/templates/templated_email/compiled
