@@ -1,0 +1,48 @@
+//
+// Button Styles
+//
+
+.btn {
+    border-width: 2px;
+    border-radius: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: .375rem .75rem 0.175rem .75rem;
+}
+
+// Primary Button Styles
+.btn-primary {
+    background-color: $button-blue;
+    padding: 1rem 3rem;
+    font-family: 'DINBold', sans-serif;
+    &:hover {
+        background-color: #0069d9;
+    }
+}
+
+// Secondary Button Styles
+.btn.secondary {
+    border: 1px solid $button-blue;
+    font-family: 'DINBold', sans-serif;
+    color: $button-blue;
+    &:hover {
+        border: 1px solid #0069d9;
+        color: #0069d9;
+    }
+}
+
+// Add to cart button
+.product__info__button {
+    float: left;
+    width: 40%;
+    margin-left: 20px;
+}
+
+// Product gallery thumbnails
+.product__gallery .carousel-indicators li img {
+    border: none;
+    background-color: $medium-gray;
+}
+.product__gallery .carousel-indicators li.active img {
+    box-shadow: 0 2px 0 0 $button-blue;
+}

@@ -1,0 +1,41 @@
+// Margin left/right
+.m-lr-15 {
+    margin-left: 1rem !important;
+    margin-right: 1rem !important;
+}
+
+// Section light gray background
+.section-bg-gray {
+    background-color: $gray !important;
+}
+
+// Custom fonts
+.dinregular {
+    font-family: 'DINRegular', sans-serif !important;
+}
+.dinbold {
+    font-family: 'DINBold', sans-serif !important;
+}
+.dinblack {
+    font-family: 'DINBlack', sans-serif !important;
+}
+.dincond {
+    font-family: 'DINCond', sans-serif !important;
+}
+.fontawesome {
+    font-family: 'FontAwesome' !important;
+}
+
+// Spacer
+hr.space {
+    background: #fff;
+    color: #fff;
+    visibility: hidden;
+    clear: both;
+    float: none;
+    width: 100%;
+    height: 1px;
+    border: none;
+    margin: 0 0 1rem 0;
+    padding: 0;
+}

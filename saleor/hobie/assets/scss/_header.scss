@@ -1,0 +1,150 @@
+// Global header/nav bar
+header {
+    position: relative;
+    color: #fff;
+    animation-duration: .3s !important;
+    @include horizontal-gradient($dark-blue, $light-blue);
+    // Nav bar
+    nav {
+        color: #fff;
+        padding: .5rem 1rem !important;
+        .navbar-brand {
+            margin: 0;
+            img {
+                width: auto;
+                height: 54px;
+            }
+        }
+        // Nav items
+        ul.navbar-nav {
+            li.nav-item {
+                a.nav-link {
+                    color: #fff;
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    font-size: 1.2rem;
+                    padding: .9rem 1rem .5rem 1rem;
+                    &:hover {
+                        color: darken($gray, 8%);
+                    }
+                }
+            }
+        }
+        // Search form
+        form.form-inline {
+            input {
+                color: #fff;
+                background-color: #2695e6;
+                border: 0;
+                border-radius: 0;
+                &::placeholder {
+                    color: #fff;
+                }
+                &:focus {
+                    color: #fff;
+                    background-color: #2695e6;
+                }
+            }
+        }
+        // Desktop hamburger menu
+        .desktop-hamburger-menu {
+            & > a.dropdown-toggle {
+                color: #fff;
+                display: block;
+                text-decoration: none;
+                &:hover {
+                    color: darken($gray, 8%);
+                }
+                &::before, &::after {
+                    display: none;
+                }
+                i {
+                    font-size: 2.3rem;
+                    display: block;
+                }
+            }
+            .dropdown-menu {
+                margin: .325rem 0 0 0;
+            }
+            .dropdown-submenu {
+                position: relative;
+                a::after {
+                    transform: rotate(-90deg);
+                    position: absolute;
+                    right: 6px;
+                    top: .8em;
+                }
+                .dropdown-menu {
+                    top: 0;
+                    left: auto;
+                    right: 100%;
+                    margin-left: .1rem;
+                    margin-right: .1rem;
+                }
+            }
+        }
+        // Where to buy link
+        .where-to-buy {
+            position: absolute;
+            top: 8px;
+            right: 15px;
+            a {
+                color: #fff;
+                text-decoration: none;
+                font-weight: bold;
+                &:hover {
+                    color: darken($gray, 8%);
+                }
+                i {
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+}
+
+// Global header/nav bar - SHRINK MODE OVERRIDES
+header.shrink {
+    nav {
+        .navbar-brand {
+            img {
+                width: auto;
+                height: 34px;
+            }
+        }
+        .navbar-collapse {
+            padding-top: 0 !important;
+            ul.navbar-nav {
+                li.nav-item {
+                    a.nav-link {
+                        font-size: 1rem;
+                        padding: .9rem 1rem .5rem 1rem;
+                    }
+                }
+            }
+            .where-to-buy {
+                display: none;
+            }
+        }
+    }
+}
+
+// Reposition & restyle "where to buy" link when in mobile menu mode
+@media screen and (max-width: 991px) {
+    header {
+        nav {
+            .where-to-buy {
+                top: auto;
+                bottom: 15px;
+                right: 15px;
+                a {
+                    text-transform: uppercase;
+                    font-size: 1.2rem;
+                    i {
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+        }
+    }
+}

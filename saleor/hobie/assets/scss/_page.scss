@@ -1,0 +1,127 @@
+//
+// Base Overrides
+//
+.maincontent {
+    min-height: 700px;
+}
+
+//
+// Page Image Header
+//
+section.page-image-header {
+    width: 100%;
+    height: 242px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    h1 {
+        color: #fff;
+        text-shadow: 1px 1px 1px rgba(0,0,50,0.5);
+    }
+    h5 {
+        color: #fff;
+        text-shadow: 1px 1px 1px rgba(0,0,50,0.5);
+    }
+}
+
+//
+// Saleor Breadcrumb Overrides
+//
+.breadcrumbs {
+    margin: 0.75rem 0;
+    li {
+        // Breadcrumb link styles
+        a {
+            color: $dark-gray;
+            font-family: 'DINBold', sans-serif;
+            font-size: 1.2rem;
+        }
+        &:last-of-type a {
+            color: $dark-gray;
+            font-family: 'DINBold', sans-serif;
+        }
+        // Breadcrumb delimiter override
+        &:not(:last-of-type):after {
+            content: '\f105';
+            font-family: 'FontAwesome';
+            color: $dark-gray;
+            font-weight: bold;
+        }
+    }
+}
+
+//
+// Sort by bar overrides
+//
+.sort-by {
+    margin-bottom: 0.75rem;
+}
+
+//
+// Product Detail Page
+//
+.product__info__price {
+    font-size: 1.5rem;
+}
+.variant-picker {
+    margin-bottom: 0.5rem;
+}
+
+//
+// Flyout Cart & Button Overrides
+//
+.navbar__brand__checkout {
+    .checkout__icon {
+        padding: 0.5rem 1.5rem 2.5rem 1.5rem;
+        .navbar__brand__checkout__icon i {
+            font-size: 2rem;
+            color: $dark-gray;
+        }
+        .checkout-label {
+            color: $dark-gray;
+            font-family: 'DINBold', sans-serif;
+            text-transform: uppercase;
+        }
+        .badge {
+            right: 8px;
+            top: 2px;
+            width: 20px;
+            height: 20px;
+            line-height: 1.5;
+            font-size: 0.7rem;
+            background-color: $button-blue;
+        }
+    }
+    .checkout-preview-dropdown {
+        top: 5.6rem;
+    }
+}
+.checkout-preview-dropdown__list .item h3 span {
+    color: inherit;
+}
+.checkout-preview-dropdown__list .item h3 p {
+    color: $dark-gray;
+}
+.checkout-preview-dropdown__total h3 span {
+    color: inherit;
+}
+
+//
+// Cart & Checkout Page Overrides
+//
+.login {
+    border-radius: 0;
+}
+.variant-picker__option {
+    border-width: 1px;
+}
+.checkout__login {
+    border-radius: 0;
+}
+
+//
+// BS4 form styles -- override Saleor to match Hobie consumer site
+//
+.form-control, input, select {
+    border-radius: 0;
+}
