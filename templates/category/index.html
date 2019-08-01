@@ -4,7 +4,7 @@
 
 {% block breadcrumb_part %}
   <li>
-    <a href="{% url 'home' %}">{% trans "Home" context 'Category breadcrumbs home' %}</a>
+    <a href="{% url 'home' %}">{% trans "Shop" context 'Category breadcrumbs home' %}</a>
   </li>
   {% for ancestor in object.get_ancestors %}
     <li><a href='{{ ancestor.get_absolute_url }}'>{{ ancestor.translated.name }}</a>

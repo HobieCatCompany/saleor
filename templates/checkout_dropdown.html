@@ -37,7 +37,7 @@
       <div class="col-md-8">
         <h3>
           {% trans "Subtotal" context "Order subtotal" %}<br>
-          <span>{% trans "Shipment and taxes calculated at checkout" context "Checkout dropdown text" %}</span>
+          <span style="font-size: 80%; color: #7b7b7b;">{% trans "Shipping &amp; taxes calculated at checkout" context "Checkout dropdown text" %}</span>
         </h3>
       </div>
       <div class="col-md-4">
@@ -59,12 +59,8 @@
     </div>
   {% else %}
     <div class="text-md-center checkout-preview-dropdown__empty">
-      <h3>{% trans "There are no products in your shopping cart." context "Empty checkout message" %}</h3>
-      <img data-src="{% static 'images/empty-checkout-bg.png' %}"
-           data-srcset="{% static 'images/empty-checkout-bg.png' %} 1x, {% static 'images/empty-checkout-bg2x.png' %} 2x"
-           src="{% placeholder size=255 %}"
-           class="lazyload lazypreload">
-      <a href="{% url 'home' %}" class="btn btn-primary">{% trans "Check out our sales" context "Empty checkout link" %}</a>
+      <h2>{% trans "There are no products in your shopping cart." context "Empty checkout message" %}</h2>
+      <a href="{% url 'home' %}" class="btn btn-primary btn-sm">{% trans "Return to the Shop Homepage" context "Empty checkout link" %}</a>
     </div>
   {% endif %}
 </div>

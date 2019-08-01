@@ -7,6 +7,11 @@
 
 {% block title %}{% trans "Thank you" context "Checkout success page title" %} — {{ block.super }}{% endblock %}
 
+{# Hide Hobie shop logo (empty block) #}
+{% block hobie_shop_logo %}{% endblock hobie_shop_logo %}
+
+{# Hide flyout cart (empty block) #}
+{% block flyout_cart %}{% endblock flyout_cart %}
 
 {% block content %}
   <div class="row checkout__thankyoupage">
@@ -52,8 +57,7 @@
           {% endif %}
         </div>
         <div class="col-md-6 pull-md-6">
-          <img class="checkout-pirate lazyload lazypreload" data-src="{% static 'images/checkout-bg.png' %}"
-               data-srcset="{% static 'images/checkout-bg.png' %} 1x, {% static 'images/checkout-bg2x.png' %} 2x">
+          <img src="https://static.hobiecat.com/saleor/assets/hobie/assets/images/hobie-flying-h-logo.png" style="width: 60%; margin: .5rem auto 0.7rem auto;" />
           <p><a href="{% url 'home' %}" class="btn secondary">
               {% trans "Continue shopping" context "Checkout secondary action" %}
           </a></p>
