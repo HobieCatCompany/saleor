@@ -34,7 +34,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" type="text/css" />
 
   {# Hobie CSS Overrides #}
-  <link rel="stylesheet" href="https://static.hobiecat.com/saleor/assets/hobie/assets/compiled/hobie.min.css" type="text/css" async />
+  <link rel="stylesheet" href="{{ STATIC_URL }}assets/hobie/assets/compiled/hobie.min.css" type="text/css" async />
 
   {% block stylesheet %}{% endblock stylesheet %}
 
@@ -62,7 +62,7 @@
     <nav class="navbar navbar-expand-lg">
         {# Hobie logo #}
         <a class="navbar-brand" href="https://www.hobie.com/">
-            <img src="https://static.hobiecat.com/saleor/assets/hobie/assets/images/2016-hobie-script-logo-white-no-shadow.png" alt="Hobie Cat Company Logo" />
+            <img src="{{ STATIC_URL }}assets/hobie/assets/images/2016-hobie-script-logo-white-no-shadow.png" alt="Hobie Cat Company Logo" />
         </a>
 
         {# Mobile hamburger menu toggle #}
@@ -237,7 +237,7 @@
 
 {% block page_image_header %}
 {# Page Image Header #}
-<section class="page-image-header p-2 text-center d-flex flex-column justify-content-center align-items-center" style="background-image: url(https://static.hobiecat.com/saleor/assets/hobie/assets/images/shop-page-header-bg.jpg);">
+<section class="page-image-header p-2 text-center d-flex flex-column justify-content-center align-items-center" style="background-image: url({{ STATIC_URL }}assets/hobie/assets/images/shop-page-header-bg.jpg);">
     {# <h1></h1> #}
     {# <h5></h5> #}
 </section>
@@ -248,7 +248,7 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <img src="https://static.hobiecat.com/saleor/assets/hobie/assets/images/shop-hobie-logo.jpg" class="mt-3" style="width: 25%; height: auto;" />
+            <img src="{{ STATIC_URL }}assets/hobie/assets/images/shop-hobie-logo.jpg" class="mt-3" style="width: 25%; height: auto;" />
         </div>
     </div>
 </div>
@@ -309,11 +309,11 @@
           {# Social icons #}
           <div class="col-lg-6 footer-social-icons">
               {# Instagram #}
-              <a href="https://www.instagram.com/hobiecatcompany/" target="_blank" class="mr-1"><img src="https://static.hobiecat.com/saleor/assets/hobie/assets/images/footer-icon-instagram.svg" alt="Instagram icon" /></a>
+              <a href="https://www.instagram.com/hobiecatcompany/" target="_blank" class="mr-1"><img src="{{ STATIC_URL }}assets/hobie/assets/images/footer-icon-instagram.svg" alt="Instagram icon" /></a>
               {# Facebook #}
-              <a href="https://www.facebook.com/HobieCatCompany" target="_blank" class="mr-1"><img src="https://static.hobiecat.com/saleor/assets/hobie/assets/images/footer-icon-facebook.svg" alt="Facebook icon" /></a>
+              <a href="https://www.facebook.com/HobieCatCompany" target="_blank" class="mr-1"><img src="{{ STATIC_URL }}assets/hobie/assets/images/footer-icon-facebook.svg" alt="Facebook icon" /></a>
               {# YouTube #}
-              <a href="https://www.youtube.com/hobieusa" target="_blank"><img src="https://static.hobiecat.com/saleor/assets/hobie/assets/images/footer-icon-youtube.svg" alt="YouTube icon" /></a>
+              <a href="https://www.youtube.com/hobieusa" target="_blank"><img src="{{ STATIC_URL }}assets/hobie/assets/images/footer-icon-youtube.svg" alt="YouTube icon" /></a>
           </div>
           {# Footer links (pill style menu) #}
           <div class="col-lg-6 footer-links">
@@ -382,7 +382,7 @@
   {# jQuery 3.4.0 -- TEMP HACK -- manually load same ver. of jQuery Saleor bundles -- fixes "$ not defined error" #}
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   {# Hobie JS Overrides #}
-  <script type="text/javascript" src="https://static.hobiecat.com/saleor/assets/hobie/assets/compiled/hobie.min.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}assets/hobie/assets/compiled/hobie.min.js"></script>
 {% endblock footer_scripts %}
 
 {% if LANGUAGES|length > 1 %}

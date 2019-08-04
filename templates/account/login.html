@@ -20,7 +20,7 @@
       <div class="col-md-6 login__register">
         <div class="login__register-link">
           <h3>{% trans "Don't have an account yet?" context "Login form secondary title" %}</h3>
-          <img src="https://static.hobiecat.com/saleor/assets/hobie/assets/images/hobie-flying-h-logo.png" style="width: 70%; margin: .5rem auto 3.2rem auto;" />
+          <img src="{{ STATIC_URL }}assets/hobie/assets/images/hobie-flying-h-logo.png" style="width: 70%; margin: .5rem auto 3.2rem auto;" />
           <a rel="nofollow" href="{% url 'account:signup' %}" class="btn secondary narrow">
             {% trans "Register" context "Login form secondary action" %}
           </a>
