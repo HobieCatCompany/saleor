@@ -109,7 +109,8 @@ def handle_fully_paid_order(order):
         events.email_sent_event(
             order=order, user=None, email_type=events.OrderEventsEmails.PAYMENT
         )
-        send_payment_confirmation.delay(order.pk)
+        #send_payment_confirmation.delay(order.pk) #HOBIE
+        send_order_confirmation.delay(order.pk) #HOBIE
 
         if order_utils.order_needs_automatic_fullfilment(order):
             order_utils.automatically_fulfill_digital_lines(order)
