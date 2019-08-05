@@ -15,6 +15,7 @@ from ..checkout.models import Checkout
 from ..core import analytics
 from ..order import events, utils as order_utils
 from ..order.emails import send_payment_confirmation
+from ..order.emails import send_order_confirmation
 from ..order.models import Order
 from . import (
     ChargeStatus,
