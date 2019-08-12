@@ -47,6 +47,8 @@ def create_csv_row(order, order_line):
         order_line.unit_price_gross.amount,
         order_line.get_total().net.amount,
         '', #Comment
+        '', #Sales G/L Account
+        '', #Cost G/L Account
         order.user_email,
         order.billing_address.full_name,
         order.billing_address.street_address_1,
