@@ -15,7 +15,7 @@ def export_orders_ready_to_fulfill_to_csv():
     previously_exported_order_ids = []
     save_exported_orders = False
     try:
-        previously_exported_order_ids = ExportedOrder.objects.values_list('id', flat=True).order_by('id')
+        previously_exported_order_ids = list(ExportedOrder.objects.values_list('id', flat=True).order_by('id'))
         save_exported_orders = True
     except:
         pass
