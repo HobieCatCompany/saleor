@@ -264,7 +264,7 @@ INSTALLED_APPS = [
     "phonenumber_field",
     "captcha",
     # Hobie apps
-    "hobie",
+    "saleor.hobie",
 ]
 
 
