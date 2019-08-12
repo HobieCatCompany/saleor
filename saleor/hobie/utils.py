@@ -45,7 +45,7 @@ def create_csv_row(order, order_line):
         order_line.product_sku,
         order_line.quantity,
         order_line.unit_price_gross.amount,
-        order_line.quantity * order_line.unit_price_gross,
+        order_line.get_total().net.amount,
         '', #Comment
         order.user_email,
         order.billing_address.full_name,
