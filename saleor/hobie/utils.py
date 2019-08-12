@@ -10,7 +10,7 @@ def export_orders_ready_to_fulfill_to_csv():
     output = StringIO()
     writer = csv.writer(output)
 
-    orders = Order.objects.ready_to_fulfill.all()
+    orders = Order.objects.ready_to_fulfill().all()
 
     previously_exported_order_ids = []
     save_exported_orders = False
@@ -22,7 +22,7 @@ def export_orders_ready_to_fulfill_to_csv():
 
     for order in orders:
         if not order.id in previously_exported_order_ids and bool(order.shipping_method):
-            for order_line in order.line_set.all():
+            for order_line in order.lines.all():
                 writer.writerow(create_csv_row(order, order_line))
             if save_exported_orders: ExportedOrder.objects.create(order_id=order.id)
 
