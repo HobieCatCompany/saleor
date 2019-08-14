@@ -159,9 +159,7 @@
               {% else %}
                 <div class="row no-results">
                   <div class="col-12">
-                    <svg data-src="{% static "images/no-results-bg.svg" %}"
-                          width="360"
-                          height="360" />
+                    <img src="{{ STATIC_URL }}hobie/images/hobie-flying-h-logo.png" style="width: 300px; height: auto; margin: .5rem;" />
                     <p>{% trans "Sorry, no matches found for your request." context "Search without results text" %}</p>
                     <p>{% trans "Try again or shop new arrivals." context "Search without results text" %}</p>
                   </div>
