@@ -26,12 +26,13 @@
     font-family: 'DINBold', sans-serif;
     color: $button-blue;
     &:hover {
+        background-color: #0069d9;
         border: 1px solid #0069d9;
-        color: #0069d9;
+        color: #fff;
     }
 }
 
-// Button hover/active states (saleor overrides)
+// Button active states (saleor overrides)
 .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
     color: #fff;
     background-color: #0069d9;
