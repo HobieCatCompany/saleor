@@ -55,8 +55,8 @@
 </head>
 
 <body>
-{% block header %}
 {# Site main header and nav bar #}
+{% block header %}
 <header>
     {# Bootstrap Navbar #}
     <nav class="navbar navbar-expand-lg">
@@ -242,16 +242,13 @@
 </header>
 {% endblock %}
 
-{% block page_image_header %}
 {# Page Image Header #}
-<section class="page-image-header p-2 text-center d-flex flex-column justify-content-center align-items-center" style="background-image: url({{ STATIC_URL }}hobie/images/shop-page-header-bg.jpg);">
-    {# <h1></h1> #}
-    {# <h5></h5> #}
-</section>
+{% block page_image_header %}
+<section class="page-image-header p-2 text-center d-flex flex-column justify-content-center align-items-center" style="background-image: url({{ STATIC_URL }}hobie/images/shop-page-header-bg.jpg);"></section>
 {% endblock page_image_header %}
 
-{% block hobie_shop_logo %}
 {# Hobie Shop Logo #}
+{% block hobie_shop_logo %}
 <div class="container">
     <div class="row">
         <div class="col">
