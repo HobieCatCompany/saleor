@@ -18,9 +18,6 @@
 </header>
 {% endblock %}
 
-{% block footer %}
-{% endblock %}
-
 {% block content %}
   <div class="row checkout">
     <div class="col-md-7">
@@ -99,3 +96,6 @@
     </div>
   </div>
 {% endblock content %}
+
+{# Hide global footer on checkout pages #}
+{% block footer %}{% endblock %}
