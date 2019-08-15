@@ -7,19 +7,16 @@
 {% block title %}{% trans "Checkout" context "Checkout page title" %} — {{ block.super }}{% endblock %}
 
 {% block header %}
-  <div class="container-fluid navbar__login">
-    <div class="container">
-      <p>{% trans "Easy and secure!" context "Checkout top message" %}</p>
-    </div>
-  </div>
-  <header class="checkout__header">
-    <div class="container">
-      <a href="{% url 'home'%}">
-        <svg data-src="{% static "images/logo-light.svg" %}" height="48px" width="176px" />
-      </a>
-      <h1>{% trans "Checkout" context "Checkout title" %}</h1>
-    </div>
-  </header>
+{# Checkout specific header (no nav links) #}
+<header>
+    {# Bootstrap Navbar #}
+    <nav class="navbar navbar-expand-lg">
+        {# Hobie logo #}
+        <a class="navbar-brand" href="https://www.hobie.com/">
+            <img src="{{ STATIC_URL }}hobie/images/2016-hobie-script-logo-white-no-shadow.png" alt="Hobie Cat Company Logo" />
+        </a>
+    </nav>
+</header>
 {% endblock %}
 
 {% block footer %}
