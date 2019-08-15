@@ -260,14 +260,6 @@
 
 <div class="container maincontent mt-3">
   {% block topcontent %}{% endblock topcontent %}
-  {% if messages %}
-    {% for message in messages %}
-      <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{ message }}
-      </div>
-    {% endfor %}
-  {% endif %}
   {# Breadcrumbs & Cart #}
   <div class="row">
       {# Breadcrumbs #}
@@ -300,7 +292,19 @@
       </div>
       {% endblock flyout_cart %}
   </div>
-  {# Main Content #}
+  {# Messages / Alerts #}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="row">
+          <div class="col">
+              <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}">
+                {{ message }}
+              </div>
+          </div>
+      </div>
+    {% endfor %}
+  {% endif %}
+  {# Main Content Row #}
   {% block content %}
   {% endblock content %}
 </div>
