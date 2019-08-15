@@ -1,13 +1,12 @@
 {% extends "base.html" %}
-
 {% load i18n %}
 {% load price from taxed_prices %}
 {% load static %}
 
 {% block title %}{% trans "Checkout" context "Checkout page title" %} — {{ block.super }}{% endblock %}
 
-{% block header %}
 {# Checkout specific header (no nav links) #}
+{% block header %}
 <header>
     {# Bootstrap Navbar #}
     <nav class="navbar navbar-expand-lg">
