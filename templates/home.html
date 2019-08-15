@@ -1,8 +1,15 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{# Hide flyout cart (empty block) #}
-{% block flyout_cart %}{% endblock flyout_cart %}
+{# CSS Overrides #}
+{% block stylesheet %}
+<style>
+div.fly-out-cart {
+    position: relative;
+    top: -3.5rem;
+}
+</style>
+{% endblock stylesheet %}
 
 {% block content %}
 <div class="row">
