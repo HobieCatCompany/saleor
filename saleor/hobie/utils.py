@@ -10,7 +10,7 @@ def export_orders_ready_to_fulfill_to_csv():
     output = StringIO()
     writer = csv.writer(output)
 
-    orders = Order.objects.ready_to_fulfill().all()
+    orders = Order.objects.ready_to_capture().all()
 
     previously_exported_order_ids = []
     save_exported_orders = False
