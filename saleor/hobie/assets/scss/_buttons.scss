@@ -61,9 +61,11 @@
 }
 
 // Radio button overrides
-.radio input {
-    border: 1px solid rgba(0,0,0,.3);
-}
-.radio input:checked:after {
-    background: $button-blue;
+.radio {
+    input {
+        border: 1px solid rgba(0,0,0,.3);
+        &:checked:after {
+            background: $button-blue;
+        }
+    }
 }
