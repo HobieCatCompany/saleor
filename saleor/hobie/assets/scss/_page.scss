@@ -117,6 +117,19 @@ section.page-image-header {
 }
 .checkout__login {
     border-radius: 0;
+    h3 {
+        font-size: 1.5rem;
+    }
+}
+.checkout {
+    h2 {
+        font-size: 1.5rem;
+    }
+    .checkout__review {
+        h3 {
+            font-size: 1.2rem;
+        }
+    }
 }
 
 //
