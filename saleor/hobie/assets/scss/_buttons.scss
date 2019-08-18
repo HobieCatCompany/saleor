@@ -59,3 +59,11 @@
 .product__gallery .carousel-indicators li.active img {
     box-shadow: 0 2px 0 0 $button-blue;
 }
+
+// Radio button overrides
+.radio input {
+    border: 1px solid rgba(0,0,0,.3);
+}
+.radio input:checked:after {
+    background: $button-blue;
+}
