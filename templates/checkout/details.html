@@ -5,6 +5,12 @@
 
 {% block title %}{% trans "Checkout" context "Checkout page title" %} — {{ block.super }}{% endblock %}
 
+{# Hide Hobie Shop Logo on Checkout Pages #}
+{% block hobie_shop_logo %}{% endblock hobie_shop_logo %}
+
+{# Hide Flyout Cart & Button on Checkout Pages #}
+{% block flyout_cart %}{% endblock flyout_cart %}
+
 {# Checkout specific header (no nav links) #}
 {% block header %}
 <header>
