@@ -51,6 +51,11 @@
     margin-left: 20px;
 }
 
+// Checkout button overrides
+.checkout__shipping .btn {
+    grid-column-start: 1;
+}
+
 // Product gallery thumbnails
 .product__gallery .carousel-indicators li img {
     border: none;
