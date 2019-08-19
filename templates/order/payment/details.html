@@ -52,16 +52,16 @@
 {% endblock breadcrumb %}
 
 {% block content %}
+  <h1 class="order-details__header">
+    {% trans "Review Order & Pay" context "Header of the order summary table" %}
+  </h1>
+  {% include "order/_ordered_items_table.html" %}
+  {# Payment gateway button & copy #}
   <div class="row checkout">
-    <div class="col-md-6">
-      <h1>{% trans "Payment" context "Payment form title" %}</h1>
+    <div class="col text-right mt-3">
       {% block forms %}{% endblock %}
     </div>
   </div>
-  <h1 class="order-details__header">
-    {% trans "Review Your Order" context "Header of the order summary table" %}
-  </h1>
-  {% include "order/_ordered_items_table.html" %}
 {% endblock content %}
 
 {# Checkout specific footer (hide global footer on checkout pages) #}
