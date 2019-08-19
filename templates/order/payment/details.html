@@ -3,11 +3,24 @@
 
 {% block title %}{% trans "Payment" context "Payment form page title" %} — {{ block.super }}{% endblock %}
 
-{# Hide Hobie Shop Logo on checkout payment page #}
+{# Hide Hobie Shop Logo on Payment Pages #}
 {% block hobie_shop_logo %}{% endblock hobie_shop_logo %}
 
-{# Hide Flyout Cart on checkout payment page #}
+{# Hide Flyout Cart & Button on Payment Pages #}
 {% block flyout_cart %}{% endblock flyout_cart %}
+
+{# Checkout & payment page specific header (no nav links) #}
+{% block header %}
+<header>
+    {# Bootstrap Navbar #}
+    <nav class="navbar navbar-expand-lg">
+        {# Hobie logo #}
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{{ STATIC_URL }}hobie/images/2016-hobie-script-logo-white-no-shadow.png" alt="Hobie Cat Company Logo" />
+        </a>
+    </nav>
+</header>
+{% endblock %}
 
 {% block breadcrumb %}
   {% with order=payment.order %}
@@ -50,3 +63,6 @@
   </h1>
   {% include "order/_ordered_items_table.html" %}
 {% endblock content %}
+
+{# Checkout specific footer (hide global footer on checkout pages) #}
+{% block footer %}{% endblock %}
