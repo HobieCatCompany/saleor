@@ -3,6 +3,12 @@
 
 {% block title %}{% trans "Payment" context "Payment form page title" %} — {{ block.super }}{% endblock %}
 
+{# Hide Hobie Shop Logo on checkout payment page #}
+{% block hobie_shop_logo %}{% endblock hobie_shop_logo %}
+
+{# Hide Flyout Cart on checkout payment page #}
+{% block flyout_cart %}{% endblock flyout_cart %}
+
 {% block breadcrumb %}
   {% with order=payment.order %}
     {% if order.user == user %}
