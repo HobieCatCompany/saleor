@@ -40,7 +40,7 @@ def create_csv_row(order, order_line):
         {'Standard Ground': 'FGP', 'Express': 'F3P', 'EMS': 'F3P'}[order.shipping_method.name], #EMS is a dummy value, of sorts
         '', #Ship To Code
         order.billing_address.full_name,
-        'RES', #Tax Schedule
+        'NONTAX', #Tax Schedule
         1, #MAS Line Type
         order_line.product_sku,
         order_line.quantity,
@@ -53,15 +53,15 @@ def create_csv_row(order, order_line):
         order.billing_address.full_name,
         order.billing_address.street_address_1,
         order.billing_address.street_address_2,
+        order.billing_address.postal_code,
         order.billing_address.city,
         order.billing_address.country_area,
-        order.billing_address.postal_code,
         order.billing_address.country.code,
         order.shipping_address.full_name,
         order.shipping_address.street_address_1,
         order.shipping_address.street_address_2,
+        order.shipping_address.postal_code,
         order.shipping_address.city,
         order.shipping_address.country_area,
-        order.shipping_address.country_area,
-        order.shipping_address.country.code  
+        order.shipping_address.country.code, 
     ]
