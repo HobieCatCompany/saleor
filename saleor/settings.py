@@ -263,6 +263,8 @@ INSTALLED_APPS = [
     "impersonate",
     "phonenumber_field",
     "captcha",
+    # Hobie apps
+    "saleor.hobie",
 ]
 
 
