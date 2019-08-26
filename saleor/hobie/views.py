@@ -5,6 +5,8 @@ from .utils import export_orders_ready_to_fulfill_to_csv
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.response import TemplateResponse
 
+from ..checkout.models import Checkout
+
 from ..checkout.forms import CheckoutShippingMethodForm
 
 from ..checkout.utils import (
