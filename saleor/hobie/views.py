@@ -1,11 +1,18 @@
 from django.http import Http404, HttpResponse
 from .utils import export_orders_ready_to_fulfill_to_csv
 
+
+from django.shortcuts import get_object_or_404, redirect, render
+from django.template.response import TemplateResponse
+
+from ..checkout.forms import CheckoutShippingMethodForm
+
 from ..checkout.utils import (
     get_checkout_context,
     update_shipping_address_in_anonymous_checkout,
     update_shipping_address_in_checkout,
     get_or_empty_db_checkout,
+    is_valid_shipping_method,
 )
 
 from ..checkout.validators import (
@@ -38,7 +45,7 @@ def shipping(request, checkout):
     )
 
     if updated:
-        return redirect("checkout:shipping-method")
+        return redirect("checkout:hobie-billing")
 
     ctx = get_checkout_context(checkout, request.discounts)
     ctx.update({"address_form": address_form, "user_form": user_form})
