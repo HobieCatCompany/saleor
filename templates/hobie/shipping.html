@@ -4,7 +4,7 @@
 
 {% block forms %}
 
-<div class="checkout__shipping-methods">
+<div novalidate class="checkout__shipping">
     {% if shipping_method_form.shipping_method.field.choices %}
       <form method="post" novalidate>
         {% csrf_token %}
@@ -39,8 +39,6 @@
     {% endif %}
   </div>
 
-  <form method="post" novalidate class="checkout__shipping">
-    {% csrf_token %}
     <h2>{% trans "Shipping address" context "Checkout shipping address title" %}</h2>
     
     <div class="checkout__addresses{{ request.user.is_authenticated|yesno:",--full-width" }}">
