@@ -15,7 +15,7 @@ from ..checkout.utils import (
     is_valid_shipping_method,
 )
 
-from ..checkout.validators import (
+from ..checkout.views.validators import (
     validate_checkout,
     validate_is_shipping_required,
     validate_shipping_address,
