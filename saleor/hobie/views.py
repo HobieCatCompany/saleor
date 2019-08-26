@@ -73,6 +73,11 @@ def shipping(request, checkout):
 
     return TemplateResponse(request, "hobie/shipping.html", ctx)
 
+
+@get_or_empty_db_checkout(Checkout.objects.for_display())
+@validate_voucher
+@validate_checkout
+@add_voucher_form
 def billing(request, checkout):
     """Display order summary with billing forms for an unauthorized user.
 
