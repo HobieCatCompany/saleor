@@ -96,6 +96,6 @@ def billing(request, checkout):
 
     ctx = get_checkout_context(checkout, request.discounts)
     ctx.update(
-        {"address_form": address_form, "note_form": note_form, "user_form": user_form}
+        {"address_form": address_form, "user_form": user_form}
     )
     return TemplateResponse(request, "hobie/billing.html", ctx)
