@@ -5,6 +5,8 @@ from .utils import export_orders_ready_to_fulfill_to_csv
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.response import TemplateResponse
 
+from ..checkout.views.discount import add_voucher_form, validate_voucher
+
 from ..checkout.models import Checkout
 
 from ..checkout.forms import CheckoutShippingMethodForm
@@ -36,8 +38,10 @@ def export_orders_to_csv(request):
 
 #HOBIE from saleor/checkout/views.py
 @get_or_empty_db_checkout(Checkout.objects.for_display())
+@validate_voucher
 @validate_checkout
 @validate_is_shipping_required
+@add_voucher_form
 def shipping(request, checkout):
     """Display the shipping step for a user who is not logged in."""
     user_form, address_form, updated = update_shipping_address_in_anonymous_checkout(
