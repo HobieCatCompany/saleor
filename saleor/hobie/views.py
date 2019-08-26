@@ -17,6 +17,8 @@ from ..checkout.utils import (
     update_shipping_address_in_checkout,
     get_or_empty_db_checkout,
     is_valid_shipping_method,
+    update_billing_address_in_anonymous_checkout,
+    
 )
 
 from ..checkout.views.validators import (
@@ -65,8 +67,30 @@ def shipping(request, checkout):
     )
     if form.is_valid():
         form.save()
-        return redirect("checkout:summary")
+        return redirect("checkout:hobie-billing")
 
     ctx.update({"shipping_method_form": form})
 
     return TemplateResponse(request, "hobie/shipping.html", ctx)
+
+def billing(request, checkout):
+    """Display order summary with billing forms for an unauthorized user.
+
+    Will create an order if all data is valid.
+    """
+    #note_form = CheckoutNoteForm(request.POST or None, instance=checkout)
+    #if note_form.is_valid():
+    #    note_form.save()
+
+    user_form, address_form, updated = update_billing_address_in_anonymous_checkout(
+        checkout, request.POST or None, request.country
+    )
+
+    #if updated:
+    #    return _handle_order_placement(request, checkout)
+
+    ctx = get_checkout_context(checkout, request.discounts)
+    ctx.update(
+        {"address_form": address_form, "note_form": note_form, "user_form": user_form}
+    )
+    return TemplateResponse(request, "hobie/billing.html", ctx)

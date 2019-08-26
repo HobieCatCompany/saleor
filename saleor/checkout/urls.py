@@ -3,7 +3,7 @@ from django.conf.urls import url
 from . import views
 from .views.discount import remove_voucher_view
 
-from ..hobie.views import shipping
+from ..hobie.views import billing, shipping
 
 checkout_urlpatterns = [
     url(r"^$", views.checkout_index, name="index"),
@@ -26,5 +26,5 @@ checkout_urlpatterns = [
 
     #HOBIE below
     url(r"^shipping/", shipping, name="hobie-shipping"),
-    url(r"^billing/", views.checkout_order_summary, name="hobie-billing"),
+    url(r"^billing/", billing, name="hobie-billing"),
 ]
