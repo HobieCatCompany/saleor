@@ -104,14 +104,14 @@ def create_payment_information(
 def handle_fully_paid_order(order):
     events.order_fully_paid_event(order=order)
 
-    Checkout.objects.get(token=order.checkout_token).delete() #HOBIE
+    #Checkout.objects.get(token=order.checkout_token).delete() #HOBIE
 
     if order.get_user_current_email():
         events.email_sent_event(
             order=order, user=None, email_type=events.OrderEventsEmails.PAYMENT
         )
         #send_payment_confirmation.delay(order.pk) #HOBIE
-        send_order_confirmation.delay(order.pk) #HOBIE
+        #send_order_confirmation.delay(order.pk) #HOBIE
 
         if order_utils.order_needs_automatic_fullfilment(order):
             order_utils.automatically_fulfill_digital_lines(order)
