@@ -144,7 +144,8 @@ def payment(request, checkout):
     return TemplateResponse(request, "hobie/payment.html", ctx)
 
 
-@check_order_status
+@get_or_empty_db_checkout(Checkout.objects.for_display())
+@validate_checkout
 def start_payment(request, checkout):
     payment_gateway, gateway_config = get_payment_gateway('stripe')
     connection_params = gateway_config.connection_params
