@@ -54,7 +54,6 @@ def export_orders_to_csv(request):
 
     return response
 
-#HOBIE from saleor/checkout/views.py
 @get_or_empty_db_checkout(Checkout.objects.for_display())
 @validate_voucher
 @validate_checkout
