@@ -187,12 +187,16 @@ def start_payment(request, checkout):
                 return redirect("order:payment-success", token=order.token)
 
     client_token = payment_gateway.get_client_token(config=gateway_config)
-    ctx = {
+
+    ctx = get_checkout_context(checkout, request.discounts)
+
+    ctx.update({
         "form": form,
         "payment": payment,
         "client_token": client_token,
-        "order": order,
-    }
+        #"order": order,
+    })
+    
     return TemplateResponse(request, "hobie/payment.html", ctx)
 
 
