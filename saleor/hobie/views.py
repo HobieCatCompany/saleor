@@ -10,7 +10,7 @@ from ..checkout.views.discount import add_voucher_form, validate_voucher
 
 from ..checkout.models import Checkout
 
-from ..checkout.forms import CheckoutShippingMethodForm
+from .forms import CheckoutShippingMethodForm
 
 from ..checkout.utils import (
     get_checkout_context,
