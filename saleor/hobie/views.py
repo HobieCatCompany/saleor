@@ -1,4 +1,5 @@
 from django.http import Http404, HttpResponse
+from django.conf import settings
 from django.db import transaction
 from django.contrib import messages
 from django.utils.translation import pgettext
@@ -129,25 +130,6 @@ def billing(request, checkout):
 @validate_voucher
 @validate_checkout
 @add_voucher_form
-def payment(request, checkout):
-    """Display order summary with billing forms for an unauthorized user.
-
-    Will create an order if all data is valid.
-    """
-
-
-    #if updated:
-    #    return _handle_order_placement(request, checkout)
-
-    ctx = get_checkout_context(checkout, request.discounts)
-
-    return TemplateResponse(request, "hobie/payment.html", ctx)
-
-
-@get_or_empty_db_checkout(Checkout.objects.for_display())
-@validate_voucher
-@validate_checkout
-@add_voucher_form
 def start_payment(request, checkout):
     payment_gateway, gateway_config = get_payment_gateway('stripe')
     connection_params = gateway_config.connection_params
@@ -194,7 +176,7 @@ def start_payment(request, checkout):
     ctx.update({
         "form": form,
         "payment": payment,
-        "client_token": client_token,
+        "client_token": settings.PAYMENT_GATEWAYS['stripe']['config']['connection_params']['public_key'],
         #"order": order,
     })
 
