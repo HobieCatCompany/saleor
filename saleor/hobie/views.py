@@ -1,4 +1,7 @@
 from django.http import Http404, HttpResponse
+from django.db import transaction
+from django.contrib import messages
+from django.utils.translation import pgettext
 from .utils import export_orders_ready_to_fulfill_to_csv
 
 
@@ -9,7 +12,10 @@ from ..account.models import Address, User
 from ..checkout.views.discount import add_voucher_form, validate_voucher
 
 from ..checkout.models import Checkout
-
+from ...core import analytics
+from ...core.exceptions import InsufficientStock
+from ...core.taxes.errors import TaxError
+from ...discount.models import NotApplicable
 from .forms import CheckoutShippingMethodForm
 
 from ..checkout.utils import (
@@ -19,6 +25,8 @@ from ..checkout.utils import (
     get_or_empty_db_checkout,
     is_valid_shipping_method,
     update_billing_address_in_checkout_with_shipping,
+    create_order,
+    prepare_order_data,
 )
 
 from ..checkout.views.validators import (
@@ -26,6 +34,13 @@ from ..checkout.views.validators import (
     validate_is_shipping_required,
     validate_shipping_address,
     validate_shipping_method,
+)
+
+from ..payment import ChargeStatus, TransactionKind, get_payment_gateway
+from ..payment.utils import (
+    create_payment,
+    create_payment_information,
+    gateway_process_payment,
 )
 
 def export_orders_to_csv(request):
@@ -127,3 +142,93 @@ def payment(request, checkout):
     ctx = get_checkout_context(checkout, request.discounts)
 
     return TemplateResponse(request, "hobie/payment.html", ctx)
+
+
+@check_order_status
+def start_payment(request, checkout):
+    payment_gateway, gateway_config = get_payment_gateway('stripe')
+    connection_params = gateway_config.connection_params
+    extra_data = {"customer_user_agent": request.META.get("HTTP_USER_AGENT")}
+    with transaction.atomic():
+        payment = create_payment(
+            gateway=gateway,
+            currency=checkout.total.gross.currency,
+            email=checkout.email,
+            billing_address=checkout.billing_address,
+            customer_ip_address=get_client_ip(request),
+            total=checkout.total.gross.amount,
+            checkout=checkout,
+            extra_data=extra_data,
+        )
+
+        #if (
+        #    order.is_fully_paid()
+        #    or payment.charge_status == ChargeStatus.FULLY_REFUNDED
+        #):
+        #    return redirect(order.get_absolute_url())
+
+        payment_info = create_payment_information(payment)
+        form = payment_gateway.create_form(
+            data=request.POST or None,
+            payment_information=payment_info,
+            connection_params=connection_params,
+        )
+        if form.is_valid():
+            try:
+                gateway_process_payment(
+                    payment=payment, payment_token=form.get_payment_token()
+                )
+            except Exception as exc:
+                form.add_error(None, str(exc))
+            else:
+                order = _handle_order_placement(request, checkout)
+                return redirect("order:payment-success", token=order.token)
+
+    client_token = payment_gateway.get_client_token(config=gateway_config)
+    ctx = {
+        "form": form,
+        "payment": payment,
+        "client_token": client_token,
+        "order": order,
+    }
+    return TemplateResponse(request, "hobie/payment.html", ctx)
+
+
+@transaction.atomic()
+def _handle_order_placement(request, checkout):
+    """Try to create an order and redirect the user as necessary.
+
+    This function creates an order from checkout and performs post-create actions
+    such as removing the checkout instance, sending order notification email
+    and creating order history events.
+    """
+    try:
+        # Run checks an prepare the data for order creation
+        order_data = prepare_order_data(
+            checkout=checkout,
+            tracking_code=analytics.get_client_id(request),
+            discounts=request.discounts,
+        )
+    except InsufficientStock:
+        return redirect("checkout:index")
+    except NotApplicable:
+        messages.warning(
+            request, pgettext("Checkout warning", "Please review your checkout.")
+        )
+        return redirect("checkout:summary")
+    except TaxError as tax_error:
+        messages.warning(
+            request,
+            pgettext(
+                "Checkout warning", "Unable to calculate taxes - %s" % str(tax_error)
+            ),
+        )
+        return redirect("checkout:summary")
+
+    # Push the order data into the database
+    order = create_order(checkout=checkout, order_data=order_data, user=request.user)
+
+    # remove checkout after order is created
+    checkout.delete()
+
+    return order

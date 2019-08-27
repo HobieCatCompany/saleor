@@ -3,7 +3,9 @@
 {% load bootstrap_form from bootstrap4 %}
 
 {% block forms %}
-<form action="/charge" method="post" id="payment-form">
+<form method="post" id="payment-form">
+    {% csrf_token %}
+    <h2>{% trans "Payment" context "Checkout shipping address title" %}</h2>
     <div class="form-row">
       <label for="card-element">
         Credit or debit card
