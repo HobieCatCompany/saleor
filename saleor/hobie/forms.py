@@ -1,3 +1,10 @@
+
+from django.utils.translation import npgettext_lazy, pgettext_lazy
+from django import forms
+from ..shipping.models import ShippingMethod
+from ..checkout.forms import ShippingMethodChoiceField
+from ..checkout.models import Checkout
+
 class CheckoutShippingMethodForm(forms.ModelForm):
     shipping_method = ShippingMethodChoiceField(
         queryset=ShippingMethod.objects.all(),
