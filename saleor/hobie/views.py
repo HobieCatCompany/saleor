@@ -12,10 +12,10 @@ from ..account.models import Address, User
 from ..checkout.views.discount import add_voucher_form, validate_voucher
 
 from ..checkout.models import Checkout
-from ...core import analytics
-from ...core.exceptions import InsufficientStock
-from ...core.taxes.errors import TaxError
-from ...discount.models import NotApplicable
+from ..core import analytics
+from ..core.exceptions import InsufficientStock
+from ..core.taxes.errors import TaxError
+from ..discount.models import NotApplicable
 from .forms import CheckoutShippingMethodForm
 
 from ..checkout.utils import (
