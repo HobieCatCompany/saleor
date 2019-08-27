@@ -152,7 +152,7 @@ def start_payment(request, checkout):
     extra_data = {"customer_user_agent": request.META.get("HTTP_USER_AGENT")}
     with transaction.atomic():
         payment = create_payment(
-            gateway=gateway,
+            gateway='stripe',
             currency=checkout.total.gross.currency,
             email=checkout.email,
             billing_address=checkout.billing_address,
