@@ -183,11 +183,12 @@ def start_payment(request, checkout):
                     payment=payment, payment_token=form.get_payment_token()
                 )
             except Exception as exc:
+                assert False, str(exc)
                 form.add_error(None, str(exc))
             else:
                 order = _handle_order_placement(request, checkout)
                 return redirect("order:payment-success", token=order.token)
-
+        if request.POST: assert False, form
     client_token = payment_gateway.get_client_token(config=gateway_config)
 
     ctx = get_checkout_context(checkout, request.discounts)
