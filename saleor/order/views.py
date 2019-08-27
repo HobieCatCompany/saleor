@@ -56,9 +56,6 @@ def payment(request, token):
     )
     orders = orders.select_related("billing_address", "shipping_address", "user")
     order = get_object_or_404(orders, token=token)
-
-    return redirect("order:payment", token=order.token, gateway='stripe') #HOBIE
-
     payments = order.payments.all()
     form_data = request.POST or None
 
