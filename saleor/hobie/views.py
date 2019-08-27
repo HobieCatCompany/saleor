@@ -146,7 +146,9 @@ def payment(request, checkout):
 
 
 @get_or_empty_db_checkout(Checkout.objects.for_display())
+@validate_voucher
 @validate_checkout
+@add_voucher_form
 def start_payment(request, checkout):
     payment_gateway, gateway_config = get_payment_gateway('stripe')
     connection_params = gateway_config.connection_params
@@ -196,7 +198,7 @@ def start_payment(request, checkout):
         "client_token": client_token,
         #"order": order,
     })
-    
+
     return TemplateResponse(request, "hobie/payment.html", ctx)
 
 
