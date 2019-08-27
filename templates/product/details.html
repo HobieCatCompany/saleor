@@ -38,11 +38,14 @@
   {% endif %}
 {% endblock meta_tags %}
 
+{# Don't include "Hobie shop logo" on product detail pages (make block empty) #}
+{% block hobie_shop_logo %}{% endblock hobie_shop_logo %}
+
 {% block breadcrumb %}
   <ul class="breadcrumbs list-unstyled">
     <li>
       <a href="{% url 'home' %}">
-        {% trans "Home" context "Main navigation item" %}
+        {% trans "Shop" context "Main navigation item" %}
       </a>
     </li>
     {% if product.category %}
@@ -73,7 +76,7 @@
           <div id="carousel-example-generic" class="carousel slide">
             <div class="carousel-inner" role="listbox">
               {% for image in images %}
-                <div class="carousel-item{% if forloop.first %} active{% endif %}">
+                <div class="carousel-item{% if forloop.first %} active{% endif %} rounded-lg" style="background-color: #f0f0f0;">
                   <div class="product-image">
                     <img class="d-block img-fluid lazyload lazypreload"
                          data-src="{% get_thumbnail image.image method="thumbnail" size=540 %}"
@@ -92,14 +95,14 @@
                 <svg data-src="{% static "images/gallery-arrow.svg" %}" />
               </a>
             {% endif %}
-            <ol class="carousel-indicators d-none d-md-block">
+            <ol class="carousel-indicators d-none d-md-block mt-3">
               {% for image in images %}
                 {% if images|length > 1 %}
                   <li data-target="#carousel-example-generic" data-slide-to="{{ forloop.counter0 }}"{% if forloop.first %} class="active"{% endif %}>
                     <img data-src="{% get_thumbnail image.image method="thumbnail" size=60 %}"
                          data-srcset="{% get_thumbnail image.image method="thumbnail" size=60 %} 1x, {% get_thumbnail image.image method="thumbnail" size=120 %} 2x"
                          alt=""
-                         class="lazyload lazypreload"
+                         class="lazyload lazypreload rounded-lg"
                          src="{% placeholder size=60 %}">
                   </li>
                 {% endif %}
@@ -118,6 +121,9 @@
       <h1 class="product__info__name">
         {{ product.translated }}
       </h1>
+      <div class="product__info__description mb-3">
+        {{ product.translated.description|safe }}
+      </div>
       {% if user.is_staff %}
         <p>
           <a href="{% url "dashboard:product-details" pk=product.pk %}">
@@ -190,11 +196,6 @@
           {% blocktrans context "Product details text" %}This product is currently <strong>unavailable</strong>.{% endblocktrans %}
         </p>
       {% endif %}
-      <div class="product__info__description">
-        <h3>{% trans "Description" context "Product details title" %}</h3>
-        <hr>
-        {{ product.translated.description|safe }}
-      </div>
       <hr>
       <table>
         {% for attribute, value in product_attributes.items %}

@@ -6,9 +6,15 @@
 
 {% block title %}{% trans "Your cart" context "Checkout page title" %} — {{ block.super }}{% endblock %}
 
+{# Don't include "Hobie shop logo" on cart page pages (make block empty) #}
+{% block hobie_shop_logo %}{% endblock hobie_shop_logo %}
+
+{# Don't include "flyout cart" on cart pages (make block empty) #}
+{% block flyout_cart %}{% endblock flyout_cart %}
+
 {% block breadcrumb %}
   <ul class="breadcrumbs list-unstyled">
-    <li><a href="{% url 'home' %}">{% trans "Home" context "Main navigation item" %}</a></li>
+    <li><a href="{% url 'home' %}">{% trans "Shop" context "Main navigation item" %}</a></li>
     <li><a rel="nofollow" href="{% url 'checkout:index' %}">{% trans "Cart" context "Checkout breadcrumb" %}</a></li>
   </ul>
 {% endblock breadcrumb %}
@@ -87,9 +93,8 @@
       </div>
     {% else %}
       <div class="checkout-preview__empty">
-        <img class="lazyload lazypreload" data-src="{% static 'images/empty-checkout-bg.png' %}" data-srcset="{% static 'images/empty-checkout-bg.png' %} 1x, {% static 'images/empty-checkout-bg2x.png' %} 2x">
         <h2>{% trans "There are no products in your shopping cart." context "Empty checkout message" %}</h2>
-        <a href="{% url 'home' %}" class="btn btn-primary">{% trans "Check out our sales" context "Empty checkout link" %}</a>
+        <a href="{% url 'home' %}" class="btn btn-primary">{% trans "Return to the Shop Homepage" context "Empty checkout link" %}</a>
       </div>
     {% endif %}
   </div>

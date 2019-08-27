@@ -1,0 +1,105 @@
+// Global footer
+div.email-subscription-form {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    form {
+        span {
+            color: $dark-blue;
+            position: relative;
+            top: 3px;
+            small {
+                position: relative;
+                top: -5px;
+                a {
+                    text-decoration: underline;
+                    color: $dark-blue;
+                }
+            }
+        }
+        input {
+            background-color: $gray;
+            padding-left: 1.25rem;
+            padding-right: 1.25rem;
+            &:focus {
+                background-color: $gray;
+            }
+        }
+    }
+}
+
+footer {
+    min-height: 125px;
+    color: #fff;
+    @include horizontal-gradient($dark-blue, $light-blue);
+    // Footer social icons
+    div.footer-social-icons {
+        a {
+            display: inline-block;
+            img {
+                width: 30px;
+                height: 30px;
+            }
+        }
+    }
+    // Footer links
+    div.footer-links {
+        ul {
+            li {
+                a {
+                    color: #fff;
+                    &:hover {
+                        text-decoration: none;
+                    }
+                    &.active {
+                        background-color: transparent !important;
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+    // Pop-up where to buy tab
+    div#where-to-buy-tab {
+        z-index: 99999;
+        position: fixed;
+        bottom: 0;
+        right: 10px;
+        animation-duration: .3s !important;
+        a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: .5rem 1.5rem 0.2rem 1.5rem;
+            background-color: #3a87df;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            &:hover {
+                color: darken($gray, 8%);
+            }
+            i {
+                font-size: 1.2rem;
+            }
+        }
+    }
+    // Footer cookie consent bar (legal stuff)
+    div#cookie-bar {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+        p {
+            color: $body-text;
+            line-height: 1.2;
+            a {
+                color: $body-text;
+                text-decoration: underline;
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}

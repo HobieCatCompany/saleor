@@ -2,11 +2,17 @@
 {% load i18n %}
 {% load bootstrap_form from bootstrap4 %}
 
+{# Hide Hobie shop logo (empty block) #}
+{% block hobie_shop_logo %}{% endblock hobie_shop_logo %}
+
+{# Hide flyout cart (empty block) #}
+{% block flyout_cart %}{% endblock flyout_cart %}
+
 {% block forms %}
   <form method="post" novalidate class="checkout__shipping">
     {% csrf_token %}
     <h2>{% trans "Shipping address" context "Checkout shipping address title" %}</h2>
-    
+
     <div class="checkout__addresses{{ request.user.is_authenticated|yesno:",--full-width" }}">
       {% if request.user.is_authenticated %}
         {% include "checkout/snippets/addresses_form.html" with addresses_form=user_form addresses=additional_addresses address_form=address_form only %}

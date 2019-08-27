@@ -5,14 +5,18 @@
 
 {% block title %}{% trans "Login" context "Checkout login page title" %} — {{ block.super }}{% endblock %}
 
+{# Hide Hobie shop logo (empty block) #}
+{% block hobie_shop_logo %}{% endblock hobie_shop_logo %}
+
+{# Hide flyout cart (empty block) #}
+{% block flyout_cart %}{% endblock flyout_cart %}
+
 {% block content %}
   <div class="row checkout__login">
     <div class="col-12 col-md-6">
       <div class="checkout__login__continue">
         <h3>{% trans "New customer?" context "Checkout login page title" %}</h3>
-        <img class="checkout-pirate lazyload lazypreload"
-             data-src="{% static 'images/login-bg.png' %}"
-             data-srcset="{% static 'images/login-bg.png' %} 1x, {% static 'images/login-bg2x.png' %} 2x">
+        <img src="{{ STATIC_URL }}hobie/images/hobie-flying-h-logo.png" style="width: 60%; margin: .5rem auto 0.7rem auto;" />
         <p>
           <a href="{% url 'checkout:start' %}" class="btn secondary narrow">
             {% trans "Continue" context "Checkout login page new users action" %}

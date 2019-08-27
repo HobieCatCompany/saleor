@@ -1,28 +1,27 @@
 {% extends "base.html" %}
-
 {% load i18n %}
 {% load price from taxed_prices %}
 {% load static %}
 
 {% block title %}{% trans "Checkout" context "Checkout page title" %} — {{ block.super }}{% endblock %}
 
-{% block header %}
-  <div class="container-fluid navbar__login">
-    <div class="container">
-      <p>{% trans "Easy and secure!" context "Checkout top message" %}</p>
-    </div>
-  </div>
-  <header class="checkout__header">
-    <div class="container">
-      <a href="{% url 'home'%}">
-        <svg data-src="{% static "images/logo-light.svg" %}" height="48px" width="176px" />
-      </a>
-      <h1>{% trans "Checkout" context "Checkout title" %}</h1>
-    </div>
-  </header>
-{% endblock %}
+{# Hide Hobie Shop Logo on Checkout Pages #}
+{% block hobie_shop_logo %}{% endblock hobie_shop_logo %}
 
-{% block footer %}
+{# Hide Flyout Cart & Button on Checkout Pages #}
+{% block flyout_cart %}{% endblock flyout_cart %}
+
+{# Checkout specific header (no nav links) #}
+{% block header %}
+<header>
+    {# Bootstrap Navbar #}
+    <nav class="navbar navbar-expand-lg">
+        {# Hobie logo #}
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{{ STATIC_URL }}hobie/images/2016-hobie-script-logo-white-no-shadow.png" alt="Hobie Cat Company Logo" />
+        </a>
+    </nav>
+</header>
 {% endblock %}
 
 {% block content %}
@@ -84,7 +83,8 @@
             </div>
           </div>
         {% endif %}
-        <div class="row checkout__review__section">
+        {# Hide promo code field on checkout pages (d-none) #}
+        <div class="row checkout__review__section d-none">
           <div class="col-12">
             <h3>{% trans "Promo code" context "Order review section title" %}</h3>
             {% include "checkout/snippets/voucher_form.html" with checkout=checkout form=voucher_form %}
@@ -102,3 +102,6 @@
     </div>
   </div>
 {% endblock content %}
+
+{# Checkout specific footer (hide global footer on checkout pages) #}
+{% block footer %}{% endblock %}

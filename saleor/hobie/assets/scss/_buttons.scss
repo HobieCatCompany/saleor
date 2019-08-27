@@ -1,0 +1,79 @@
+//
+// Button Styles
+//
+
+.btn {
+    border-width: 2px;
+    border-radius: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: .375rem .75rem 0.175rem .75rem;
+}
+
+// Primary Button Styles
+.btn-primary {
+    background-color: $button-blue;
+    padding: 1rem 3rem;
+    font-family: 'DINBold', sans-serif;
+    &:hover {
+        background-color: #0069d9;
+    }
+}
+
+// Secondary Button Styles
+.btn.secondary {
+    border: 1px solid $button-blue;
+    font-family: 'DINBold', sans-serif;
+    color: $button-blue;
+    &:hover {
+        background-color: #0069d9;
+        border: 1px solid #0069d9;
+        color: #fff;
+    }
+}
+
+// Button active states (saleor overrides)
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: transparent;
+}
+.dropdown-item.active, .dropdown-item:active {
+    color: inherit;
+    text-decoration: none;
+    background-color: inherit;
+}
+
+// Add to cart button
+.product__info__button {
+    float: left;
+    width: 40%;
+    margin-left: 20px;
+}
+
+// Checkout button overrides
+.checkout__shipping .btn {
+    grid-column-start: 1;
+}
+.checkout__shipping-methods .btn {
+    grid-column-start: 1;
+}
+
+// Product gallery thumbnails
+.product__gallery .carousel-indicators li img {
+    border: none;
+    background-color: $medium-gray;
+}
+.product__gallery .carousel-indicators li.active img {
+    box-shadow: 0 2px 0 0 $button-blue;
+}
+
+// Radio button overrides
+.radio {
+    input {
+        border: 1px solid rgba(0,0,0,.3);
+        &:checked:after {
+            background: $button-blue;
+        }
+    }
+}

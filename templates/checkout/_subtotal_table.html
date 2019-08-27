@@ -23,6 +23,7 @@
       </div>
     </div>
   </div>
+  {% comment %}
   {% if country_form.country.field.choices %}
     <div class="last table__row checkout-preview__delivery-info">
       <div class="row">
@@ -50,12 +51,13 @@
       </div>
     </div>
   {% endif %}
+  {% endcomment %}
 {% endif %}
 <div class="checkout-preview__total">
   <div class="row">
     <div class="col-8 checkout-preview__total__subtotal">
       <h3>{% trans "Total" context "Order subtotal" %}</h3>
-      <small>{% trans "Shipment and taxes calculated at checkout" context "Checkout summary text" %}</small>
+      <span style="font-size: 80%; color: #7b7b7b;">{% trans "Shipping &amp; taxes calculated at checkout" context "Checkout dropdown text" %}</span>
     </div>
     <div class="col-4">
       {% spaceless %}

@@ -27,7 +27,15 @@
 
   {% include 'favicon.html' %}
   {% render_bundle 'storefront' 'css' attrs='async' %}
-  <link type="text/css" href="{{ STATIC_URL }}/assets/hobie/assets/hobie.css" rel="stylesheet" async/>
+
+  {# FontAwesome CSS #}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />
+  {# Animate.css #}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" type="text/css" />
+
+  {# Hobie CSS Overrides #}
+  <link rel="stylesheet" href="{{ STATIC_URL }}hobie/compiled/hobie.min.css" type="text/css" async />
+
   {% block stylesheet %}{% endblock stylesheet %}
 
   {% block meta_tags %}
@@ -47,263 +55,335 @@
 </head>
 
 <body>
+{# Site main header and nav bar #}
 {% block header %}
-  <header class="navbar" role="navigation">
-    <div class="navbar__login container-fluid {% if user.is_impersonate %} bg-warning{% endif %}">
-      <div class=" d-none d-md-block container">
-      <div class="row">
-        <div class="col-6">
-          <p class="text-left">{{ site.settings.translated.header_text }}</p>
-        </div>
-        <div class="col-6">
-          <ul class="float-right">
-            {% get_available_languages as LANGUAGES %}
+<header>
+    {# Bootstrap Navbar #}
+    <nav class="navbar navbar-expand-lg">
+        {# Hobie logo #}
+        <a class="navbar-brand" href="https://www.hobie.com/">
+            <img src="{{ STATIC_URL }}hobie/images/2016-hobie-script-logo-white-no-shadow.png" alt="Hobie Cat Company Logo" />
+        </a>
 
-            {# We display language picker only if there're languages to pick from #}
-            {% if LANGUAGES|length > 1 %}
-              {% get_current_language as LANGUAGE_CODE %}
-              <li>
-                <div class="language-picker dropdown show">
-                  <a class="dropdown-toggle dropdown-link " id="language-picker-button">
-                    {{ LANGUAGE_CODE|language_name_local }}
-                  </a>
-                  {% include "_language_picker.html" %}
-                </div>
-              </li>
-            {% endif %}
-            {% if user.is_authenticated %}
-              {% if user.is_staff or request.impersonator.is_staff %}
-                <li>
-                  <a href="{% url "dashboard:index" %}" target="_blank" rel="noopener">
-                    {% trans "Dashboard" context "Main navigation item" %}
-                  </a>
+        {# Mobile hamburger menu toggle #}
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"><i class="fa fa-bars" style="color: #fff; font-size: 2.3rem;"></i></span>
+        </button>
+
+        {# Nav items #}
+        <div class="collapse navbar-collapse pt-4" id="navbarSupportedContent">
+            <ul class="navbar-nav m-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.hobie.com/kayaks/">{% trans "Kayaks" %}</a>
                 </li>
-              {% endif %}
-              <li>
-                <a href="{% url "account:details" %}">
-                  {% trans "Your account" context "Main navigation item" %}</a>
-              </li>
-              {% if user.is_impersonate %}
-                <li>
-                  <a href="{% url "impersonate-stop" %}">
-                    {% trans 'Stop impersonating' context 'Main navigation item' %}
-                  </a>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.hobie.com/fishing-kayaks/">{% trans "Fishing" %}</a>
                 </li>
-              {% else %}
-                <li>
-                  <a href="{% url "account:logout" %}">
-                    {% trans "Log out" context "Main navigation item" %}</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.hobie.com/pedalboards/">{% trans "Pedalboards" %}</a>
                 </li>
-              {% endif %}
-            {% else %}
-              <li>
-                <a rel="nofollow" href="{% url "account:signup" %}">
-                  {% trans "Register" context "Main navigation item" %}</a>
-              </li>
-              <li>
-                <a rel="nofollow" href="{% url "account:login" %}">
-                  {% trans "Log in" context "Main navigation item" %}
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.hobie.com/sail/">{% trans "Sail" %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.hobie.com/sups/">{% trans "SUP" %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.hobie.com/surfing/">{% trans "Surf" %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.hobie.com/accessories/">{% trans "Gear" %}</a>
+                </li>
+                {# Saleor "Shop" Nav Item (drop-down) #}
+                <li class="nav-item dropdown">
+                    {# Shop drop-down menu toggle #}
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Shop</a>
+                    {# Shop drop-down menu items #}
+                    <ul class="dropdown-menu">
+                        {# Saleor Category Links #}
+                        {# MENS #}
+                        <li><a class="dropdown-item disabled" href="#"><strong>{% trans "MENS" %}</strong></a></li>
+                        <li><a class="dropdown-item" href="/shop/products/category/mens-apparel-2/">{% trans "Apparel" %}</a></li>
+                        <li><a class="dropdown-item" href="/shop/products/category/mens-sunglasses-5/">{% trans "Sunglasses" %}</a></li>
+                        <div class="dropdown-divider"></div>
+                        {# WOMENS #}
+                        <li><a class="dropdown-item disabled" href="#"><strong>{% trans "WOMENS" %}</strong></a></li>
+                        <li><a class="dropdown-item" href="/shop/products/category/womens-apparel-7/">{% trans "Apparel" %}</a></li>
+                        <li><a class="dropdown-item" href="/shop/products/category/womens-sunglasses-6/">{% trans "Sunglasses" %}</a></li>
+                        <div class="dropdown-divider"></div>
+                        {# ACCESSORIES #}
+                        <li><a class="dropdown-item disabled" href="#"><strong>{% trans "ACCESSORIES" %}</strong></a></li>
+                        <li><a class="dropdown-item" href="/shop/products/category/accessories-1/">{% trans "View All" %}</a></li>
+                        <div class="dropdown-divider"></div>
+                        {# Saleor Account Links #}
+                        <li><a class="dropdown-item disabled" href="#"><strong>{% trans "ACCOUNT" %}</strong></a></li>
+                        {% if user.is_authenticated %}
+                          {% if user.is_staff or request.impersonator.is_staff %}
+                            <li>
+                              <a href="{% url "dashboard:index" %}" class="dropdown-item" target="_blank" rel="noopener">
+                                {% trans "Dashboard" context "Main navigation item" %}
+                              </a>
+                            </li>
+                          {% endif %}
+                          <li>
+                            <a href="{% url "account:details" %}" class="dropdown-item">
+                              {% trans "Your account" context "Main navigation item" %}</a>
+                          </li>
+                          {% if user.is_impersonate %}
+                            <li>
+                              <a href="{% url "impersonate-stop" %}" class="dropdown-item">
+                                {% trans 'Stop impersonating' context 'Main navigation item' %}
+                              </a>
+                            </li>
+                          {% else %}
+                            <li>
+                              <a href="{% url "account:logout" %}" class="dropdown-item">
+                                {% trans "Log out" context "Main navigation item" %}</a>
+                            </li>
+                          {% endif %}
+                        {% else %}
+                          <li>
+                            <a rel="nofollow" href="{% url "account:signup" %}" class="dropdown-item">
+                              {% trans "Register" context "Main navigation item" %}</a>
+                          </li>
+                          <li>
+                            <a rel="nofollow" href="{% url "account:login" %}" class="dropdown-item">
+                              {% trans "Log in" context "Main navigation item" %}
+                            </a>
+                          </li>
+                        {% endif %}
+                    </ul>
+                </li>
+            </ul>
+
+            {# Search form #}
+            <form class="form-inline my-2 my-lg-0 d-none" action="#" method="post">
+                <input class="form-control fontawesome" type="search" aria-label="Search" placeholder="&#xf002;">
+            </form>
+
+            {# Desktop hamburger menu toggle #}
+            <div class="desktop-hamburger-menu dropdown ml-3">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-bars d-none d-lg-block" aria-hidden="true"></i>
+                    <div class="d-lg-none d-xl-none" style="color: #fff; text-transform: uppercase; font-weight: 700; font-size: 1.2rem; padding: .9rem 1rem .5rem 0;">Other Links</div>
                 </a>
-              </li>
-            {% endif %}
-          </ul>
-        </div>
-      </div>
-    </div>
-    </div>
-    <div class="navbar__brand container-fluid d-block">
-      <div class="container">
-        <div class="row no-gutters">
-          <div class="col-8 col-md-4 navbar__logo">
-            <div class="menu-icon-mobile d-md-none navbar__brand__menu-toggle closed open">
-              <svg data-src="{% static "images/mobile-menu.svg" %}" width="28px" height="20px"/>
+                {# Desktop hamburger menu items #}
+                <ul class="dropdown-menu dropdown-menu-right">
+                    {# Our Story #}
+                    <li><a class="dropdown-item" href="https://www.hobie.com/about-us/">{% trans "Our Story" %}</a></li>
+                    {# Resorts/Rentals #}
+                    <li class="dropdown-submenu">
+                        <a class="dropdown-item dropdown-toggle" href="#">{% trans "Resorts/Rentals" %}</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="https://www.hobie.com/pedalboards/mirage-eclipse-dura-series/"><i class="fa fa-anchor" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Mirage Eclipse Dura" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.hobie.com/sups/duracruz/"><i class="fa fa-anchor" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "DuraCruz" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.hobie.com/sail/wave/"><i class="fa fa-anchor" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Wave Club" %}</a></li>
+                        </ul>
+                    </li>
+                    {# Community #}
+                    <li class="dropdown-submenu">
+                        <a class="dropdown-item dropdown-toggle" href="#">{% trans "Community" %}</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="https://www.hobie.com/blog/hobie-bass-open-series,974/"><i class="fa fa-trophy" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Hobie Bass Open Series" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.hobie.com/blog/"><i class="fa fa-bullhorn" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Blog" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.hobie.com/forums/"><i class="fa fa-comments-o" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Forums" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.hobie.com/hobie-outdoor-adventures/"><i class="fa fa-television" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Hobie TV" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.hobie.com/upcoming-events/"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Events" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.hobie.com/hobie-fishing-team/"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Fishing Team" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.hobie.com/hobie-top-guns/"><i class="fa fa-star" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Fishing Top Guns" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.hobie.com/try-a-hobie/"><i class="fa fa-flask" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Try a Hobie" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.hobie.com/hobie-experience/"><i class="fa fa-film" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "The Hobie Experience" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.hobie.com/hobie-cat-racing/"><i class="fa fa-flag-checkered" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "IHCA Racing" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.hobie.com/hobie-first-cast/"><i class="fa fa-link" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "First Cast" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.hobie.com/hobie-island-club/"><i class="fa fa-anchor" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Island Club" %}</a></li>
+                        </ul>
+                    </li>
+                    {# Support #}
+                    <li class="dropdown-submenu">
+                        <a class="dropdown-item dropdown-toggle" href="#">{% trans "Support" %}</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="https://www.hobie.com/support/"><i class="fa fa-life-ring" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Product Support" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.hobie.com/catalogs-brochures/"><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Catalogs &amp; Brochures" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.hobie.com/product-registration/"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Product Registration" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.hobie.com/dealership-inquiry/"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Dealership Inquiry" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.hobie.com/warranty/"><i class="fa fa-certificate" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Warranty" %}</a></li>
+                        </ul>
+                    </li>
+                    {# Other Links #}
+                    <li class="dropdown-submenu">
+                        <a class="dropdown-item dropdown-toggle" href="#">{% trans "Other Links" %}</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="https://www.hobie.com/dealers/"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Find a Dealer" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.hobie.com/contact-us/"><i class="fa fa-comment" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Contact Us" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.hobie.com/forums/"><i class="fa fa-comments-o" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Forums" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.hobie.com/press/"><i class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Press" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.hobie.com/jobs/"><i class="fa fa-id-badge" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Jobs" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.facebook.com/HobieCatCompany"><i class="fa fa-facebook-official" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Hobie Facebook" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.facebook.com/hobie.fishing"><i class="fa fa-facebook-official" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Fishing Facebook" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.youtube.com/hobieusa"><i class="fa fa-youtube-square" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "YouTube Channel" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.instagram.com/hobiecatcompany/"><i class="fa fa-instagram" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Instagram" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.hobie.com/terms-of-use/"><i class="fa fa-gavel" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Terms of Use" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.hobie.com/privacy-policy/"><i class="fa fa-gavel" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Privacy Policy" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.hobie.com/cookie-policy/"><i class="fa fa-gavel" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Cookie Policy" %}</a></li>
+                            <li><a class="dropdown-item" href="https://www.hobie.com/ip/"><i class="fa fa-trademark" aria-hidden="true"></i>&nbsp;&nbsp;{% trans "Intellectual Property" %}</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
-            <a href="{% url 'home' %}">
-              <svg data-src="{% static "images/logo-light.svg" %}"/>
-            </a>
-          </div>
-          <div class="col-2 col-md-5 navbar__search static">
-            {% if SEARCH_IS_ENABLED %}
-              <div class="d-md-none mobile-search-icon">
-                <svg data-src="{% static "images/search.svg" %}" width="30" height="30"/>
-              </div>
-              <form class="form-inline search-form" action="{% url "search:search" %}">
-                <div class="mobile-close-search d-md-none">
-                  <svg data-src="{% static "images/close.svg" %}" width="30" height="30"/>
-                </div>
-                <input class="form-control" type="text" name="q"
-                       value="{% if query %}{{ query }}{% endif %}"
-                       placeholder="{% trans "Search for product" %}"
-                       autocomplete="off"
-                       required>
-                <button class="btn btn-primary" type="submit">
-                  {% trans "Search" %} <svg data-src="{% static "images/search.svg" %}" width="18" height="18"/>
-                </button>
-              </form>
-            {% endif %}
-          </div>
-          <div class="col-2 col-md-3">
-            <div class="navbar__brand__checkout float-right">
-              <a rel="nofollow" class="checkout__icon" href="{% url "checkout:index" %}">
-                <span class="checkout-label d-none d-md-inline-block">
-                  {% trans "Your cart" context "Main navigation item" %}
-                </span>
-                <div class="navbar__brand__checkout__icon">
-                  <svg data-src="{% static "images/checkout.svg" %}" width="24" height="24"/>
-                </div>
-                <span class="badge {% if not checkout_counter %}empty{% endif %}">
-                  {% if checkout_counter %}
-                    {{ checkout_counter }}
-                  {% else %}
-                    0
-                  {% endif %}
-                </span>
-              </a>
-              <div class="checkout-preview-dropdown d-none">
-                {% include 'checkout_dropdown.html' %}
-              </div>
+
+            {# Where to buy link #}
+            <div class="where-to-buy">
+                <a href="https://www.hobie.com/dealers/{% if page.settings.dealer_finder_product_line %}?product_line={{ page.settings.dealer_finder_product_line }}{% endif %}">
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;Where to buy?
+                </a>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-    <div class="navbar__menu container d-block">
-      <nav class="navigation">
-        {% menu site_menu=site.settings.top_menu horizontal=True %}
-      </nav>
-    </div>
-  </header>
+    </nav>
+</header>
 {% endblock %}
-<div class="container maincontent">
+
+{# Page Image Header #}
+{% block page_image_header %}
+<section class="page-image-header p-2 text-center d-flex flex-column justify-content-center align-items-center" style="background-image: url({{ STATIC_URL }}hobie/images/shop-page-header-bg.jpg);"></section>
+{% endblock page_image_header %}
+
+{# Hobie Shop Logo #}
+{% block hobie_shop_logo %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <a href="{% url 'home' %}"><img src="{{ STATIC_URL }}hobie/images/shop-hobie-logo.png" class="mt-3" style="width: 25%; height: auto;" /></a>
+        </div>
+    </div>
+</div>
+{% endblock hobie_shop_logo %}
+
+<div class="container maincontent mt-3">
   {% block topcontent %}{% endblock topcontent %}
+  {# Breadcrumbs & Cart #}
+  <div class="row">
+      {# Breadcrumbs #}
+      <div class="col-7">
+          {% block breadcrumb %}{% endblock breadcrumb %}
+      </div>
+      {# Flyout Cart & Button #}
+      {% block flyout_cart %}
+      <div class="col-5 text-right fly-out-cart">
+          <div class="navbar__brand__checkout float-right">
+            <a rel="nofollow" class="checkout__icon" href="{% url "checkout:index" %}">
+              <span class="checkout-label d-none d-md-inline-block">
+                {% trans "Your cart" context "Main navigation item" %}
+              </span>
+              <div class="navbar__brand__checkout__icon">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+              </div>
+              <span class="badge {% if not checkout_counter %}empty{% endif %}">
+                {% if checkout_counter %}
+                  {{ checkout_counter }}
+                {% else %}
+                  0
+                {% endif %}
+              </span>
+            </a>
+            <div class="checkout-preview-dropdown d-none">
+              {% include 'checkout_dropdown.html' %}
+            </div>
+          </div>
+      </div>
+      {% endblock flyout_cart %}
+  </div>
+  {# Messages / Alerts #}
   {% if messages %}
     {% for message in messages %}
-      <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        {{ message }}
+      <div class="row">
+          <div class="col">
+              <div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %}">
+                {{ message }}
+              </div>
+          </div>
       </div>
     {% endfor %}
   {% endif %}
-  {% block breadcrumb %}
-  {% endblock breadcrumb %}
+  {# Main Content Row #}
   {% block content %}
   {% endblock content %}
 </div>
+
 {% block footer %}
-  <footer class="footer">
-  <div class="footer__menus">
-    <div class="container">
+{# Hobie consumer website footer #}
+<footer class="mt-5 pt-2 pb-2">
+  <div class="container">
       <div class="row">
-          {% footer_menu site_menu=site.settings.bottom_menu %}
-        <div class="col-md-2 col-6">
-        <ul class="menu">
-          <li class="nav-item__dropdown menu__item">
-            <a>
-              <strong>
-                {% trans "Account" %}
-              </strong>
-            </a>
-            <hr />
-            <li>
-              <a rel="nofollow" href="{% url "checkout:index" %}">
-                {% trans "Your cart" context "Main navigation item" %}
-              </a>
-            </li>
-            {% if user.is_authenticated %}
-              {% if user.is_staff %}
-                <li>
-                  <a href="{% url "dashboard:index" %}" target="_blank" rel="noopener">
-                    {% trans "Dashboard" context "Main navigation item" %}
-                  </a>
-                </li>
-                <li>
-                  <a href="{% url "styleguide" %}" target="_blank">
-                    {% trans "Style guide" context "Main navigation item" %}
-                  </a>
-                </li>
-              {% endif %}
-              <li>
-                <a href="{% url "account:details" %}">
-                  {% trans "Your account" context "Main navigation item" %}
-                </a>
-              </li>
-              {% if user.is_impersonate %}
-                <li>
-                  <a href="{% url "impersonate-stop" %}">
-                    {% trans 'Stop impersonating' context 'Main navigation item' %}
-                  </a>
-                </li>
-              {% else %}
-                <li>
-                  <a href="{% url "account:logout" %}">
-                    {% trans "Log out" context "Main navigation item" %}</a>
-                </li>
-              {% endif %}
-            {% else %}
-              <li>
-                <a rel="nofollow" href="{% url "account:signup" %}">
-                  {% trans "Register" context "Main navigation item" %}
-                </a>
-              </li>
-              <li>
-                <a rel="nofollow" href="{% url "account:login" %}">
-                  {% trans "Log in" context "Main navigation item" %}
-                </a>
-              </li>
-            {% endif %}
-          </ul>
-        </div>
-        <div class="offset-md-2 col-md-4 col-12">
-          <div class="footer__menus__social-container">
-            <div class="footer__menus__social">
-              <a target="_blank" rel="noopener" class="social-footer" href="https://www.facebook.com/mirumeelabs/">
-                <svg data-src="{% static "images/facebook-logo.svg" %}" width="45px" height="45px"/>
-              </a>
-              <a target="_blank" rel="noopener" class="social-footer" href="https://github.com/mirumee/saleor">
-                <svg data-src="{% static "images/github-logo.svg" %}" width="45px" height="45px"/>
-              </a>
-              <a target="_blank" rel="noopener" class="social-footer" href="https://twitter.com/getsaleor">
-                <svg data-src="{% static "images/twitter-logo.svg" %}" width="45px" height="45px"/>
-              </a>
-              <a target="_blank" rel="noopener" class="social-footer" href="https://plus.google.com/+Mirumee">
-                <svg data-src="{% static "images/google-logo.svg" %}" width="45px" height="45px"/>
-              </a>
-              <a target="_blank" rel="noopener" class="social-footer" href="https://www.meetup.com/Mirumee-Talks/">
-                <svg data-src="{% static "images/meetup-logo.svg" %}" width="45px" height="45px"/>
-              </a>
-              <a target="_blank" rel="noopener" class="social-footer" href="https://linkedin.com/company/mirumee-software">
-                <svg data-src="{% static "images/linkedin-logo.svg" %}" width="45px" height="45px"/>
-              </a>
-              <a target="_blank" rel="noopener" class="social-footer" href="https://dribbble.com/mirumee">
-                <svg data-src="{% static "images/dribbble-logo.svg" %}" width="45px" height="45px"/>
-              </a>
-              <a target="_blank" rel="noopener" class="social-footer" href="https://www.instagram.com/explore/tags/mirumee/">
-                <svg data-src="{% static "images/instagram-logo.svg" %}" width="45px" height="45px"/>
-              </a>
-            </div>
+          {# Social icons #}
+          <div class="col-lg-6 footer-social-icons">
+              {# Instagram #}
+              <a href="https://www.instagram.com/hobiecatcompany/" target="_blank" class="mr-1"><img src="{{ STATIC_URL }}hobie/images/footer-icon-instagram.svg" alt="Instagram icon" /></a>
+              {# Facebook #}
+              <a href="https://www.facebook.com/HobieCatCompany" target="_blank" class="mr-1"><img src="{{ STATIC_URL }}hobie/images/footer-icon-facebook.svg" alt="Facebook icon" /></a>
+              {# YouTube #}
+              <a href="https://www.youtube.com/hobieusa" target="_blank"><img src="{{ STATIC_URL }}hobie/images/footer-icon-youtube.svg" alt="YouTube icon" /></a>
           </div>
-        </div>
+          {# Footer links (pill style menu) #}
+          <div class="col-lg-6 footer-links">
+              {# Pill nav #}
+              <ul class="nav nav-pills" role="tablist">
+                  {# Shortcuts #}
+                  <li class="nav-item">
+                      <a href="#footer-shortcuts" class="nav-link" data-toggle="tab" role="tab">{% trans "Shortcuts" %}</a>
+                  </li>
+                  {# Hobie Sites #}
+                  <li class="nav-item">
+                      <a href="#footer-hobie-sites" class="nav-link" data-toggle="tab" role="tab">{% trans "Hobie Sites" %}</a>
+                  </li>
+                  {# Legal #}
+                  <li class="nav-item">
+                      <a href="#footer-legal" class="nav-link" data-toggle="tab" role="tab">{% trans "Legal" %}</a>
+                  </li>
+              </ul>
+              {# Pill boxes #}
+              <div class="tab-content">
+                  {# Shortcuts #}
+                  <div id="footer-shortcuts" class="tab-pane fade pl-3" role="tabpanel">
+                      <ul class="list-unstyled">
+                          <li><a href="https://www.hobie.com/dealers/" class="small">Find a Dealer</a></li>
+                          <li><a href="https://www.hobie.com/forums/" class="small">Forums</a></li>
+                          <li><a href="https://www.hobie.com/support/" class="small">Product Support</a></li>
+                          <li><a href="https://www.hobie.com/product-registration/" class="small">Product Registration</a></li>
+                          <li><a href="https://www.hobie.com/jobs/" class="small">Employment Opportunities</a></li>
+                          <li><a href="https://www.hobie.com/contact-us/" class="small">Contact Us</a></li>
+                      </ul>
+                  </div>
+                  {# Hobie Sites #}
+                  <div id="footer-hobie-sites" class="tab-pane fade pl-3" role="tabpanel">
+                      <ul class="list-unstyled">
+                          <li><a href="http://www.hobiesurfshop.com/" target="_blank" class="small">Hobie Surf Shop</a></li>
+                          <li><a href="http://www.hobiepolarized.com/" target="_blank" class="small">Hobie Polarized Sunglasses</a></li>
+                      </ul>
+                  </div>
+                  {# Legal #}
+                  <div id="footer-legal" class="tab-pane fade pl-3" role="tabpanel">
+                      <ul class="list-unstyled">
+                          <li><a href="https://www.hobie.com/terms-of-use/" class="small">Terms of Use</a></li>
+                          <li><a href="https://www.hobie.com/privacy-policy/" class="small">Privacy Policy</a></li>
+                          <li><a href="https://www.hobie.com/ip/" class="small">Intellectual Property</a></li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
       </div>
-    </div>
   </div>
-  <div class="footer__copy">
-    <div class="container">
-      <div class="row">
-        <div class="col-4">
-          <a href="{% url 'home' %}" class="footer__logo float-md-left">
-            <svg data-src="{% static "images/logo-light.svg" %}"/>
-          </a>
-        </div>
-        <div class="col-8 footer__copy-text">COPYRIGHT © 2009–2019 MIRUMEE SOFTWARE</div>
-      </div>
-    </div>
-  </div>
-  </footer>
+</footer>
 {% endblock %}
+
 {% block footer_scripts %}
   <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
   {% render_bundle 'storefront' 'js' %}
+  {# jQuery 3.4.0 -- TEMP HACK -- manually load same ver. of jQuery Saleor bundles -- fixes "$ not defined error" #}
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  {# Hobie JS Overrides #}
+  <script type="text/javascript" src="{{ STATIC_URL }}hobie/compiled/hobie.min.js"></script>
 {% endblock footer_scripts %}
+
 {% if LANGUAGES|length > 1 %}
   {% include "_language_picker_modal.html" %}
 {% endif %}

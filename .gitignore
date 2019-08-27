@@ -38,3 +38,7 @@ webpack-bundle.json
 
 # Exported results file
 django-queries-results.html
+
+# Hobie Overrides
+!/saleor/hobie/assets/compiled/*
+config.codekit3

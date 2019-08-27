@@ -7,7 +7,7 @@
 {% for product, availability in products %}
   <div class="col-6 col-lg-3 product-list">
     <a href="{{ product.get_absolute_url }}" class="link--clean">
-      <div class="text-center">
+      <div class="text-center rounded-lg" style="background-color: #f0f0f0;">
         <div>
           <div class="product-image">
             <img class="img-responsive lazyload lazypreload"
@@ -16,11 +16,11 @@
                  alt=""
                  src="{% placeholder size=255 %}">
             </div>
-          <span class="product-list-item-name" title="{{ product.translated }}">{{ product.translated }}</span>
+          <span class="product-list-item-name" title="{{ product.translated }}"><strong>{{ product.translated }}</strong></span>
         </div>
-        <div class="panel-footer">
+        <div class="panel-footer pb-2">
           {% if availability.available %}
-            {% price_range availability.price_range %}
+            <div class="font-weight-bold">{% price_range availability.price_range %}</div>
             {% if availability.on_sale %}
               {% if availability.price_range_undiscounted.start != availability.price_range.start %}
                 <div class="product-list__sale">

@@ -1,0 +1,49 @@
+// Din Black WebFont
+@font-face {
+    font-family: 'DINBlack';
+    src: url('../fonts/din-black.eot');
+    src: url('../fonts/din-black.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/din-black.woff') format('woff'),
+         url('../fonts/din-black.ttf') format('truetype'),
+         url('../fonts/din-black.svg#DINBlack') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+// Din Condensed Black WebFont
+@font-face {
+    font-family: 'DINCond';
+    src: url('../fonts/din-cond-black.eot');
+    src: url('../fonts/din-cond-black.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/din-cond-black.woff2') format('woff2'),
+         url('../fonts/din-cond-black.woff') format('woff'),
+         url('../fonts/din-cond-black.ttf') format('truetype'),
+         url('../fonts/din-cond-black.svg#DINCond') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+// Din Regular WebFont
+@font-face {
+    font-family: 'DINRegular';
+    src: url('../fonts/din-regular.eot');
+    src: url('../fonts/din-regular.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/din-regular.woff') format('woff'),
+         url('../fonts/din-regular.ttf') format('truetype'),
+         url('../fonts/din-regular.svg#DINRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+// Din Bold WebFont
+@font-face {
+    font-family: 'DINBold';
+    src: url('../fonts/din-bold.eot');
+    src: url('../fonts/din-bold.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/din-bold.woff2') format('woff2'),
+         url('../fonts/din-bold.woff') format('woff'),
+         url('../fonts/din-bold.ttf') format('truetype'),
+         url('../fonts/din-bold.svg#DINBold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}

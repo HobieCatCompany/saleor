@@ -20,7 +20,6 @@
         </mj-text>
       </mj-column>
     </mj-section>
-    <mj-include path="./partials/_order_lines.mjml" />
     <mj-section>
       <mj-column>
         <mj-table>
@@ -51,6 +50,7 @@
         </mj-table>
       </mj-column>
     </mj-section>
+    <mj-include path="./partials/_order_lines.mjml" />
     <mj-include path="./shared/footer.mjml" />
   </mj-body>
 </mjml>
