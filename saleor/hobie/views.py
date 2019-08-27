@@ -5,6 +5,7 @@ from .utils import export_orders_ready_to_fulfill_to_csv
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.response import TemplateResponse
 
+from ..account.models import Address, User
 from ..checkout.views.discount import add_voucher_form, validate_voucher
 
 from ..checkout.models import Checkout
@@ -17,8 +18,7 @@ from ..checkout.utils import (
     update_shipping_address_in_checkout,
     get_or_empty_db_checkout,
     is_valid_shipping_method,
-    update_billing_address_in_anonymous_checkout,
-    
+    update_billing_address_in_checkout_with_shipping,
 )
 
 from ..checkout.views.validators import (
@@ -87,8 +87,12 @@ def billing(request, checkout):
     #if note_form.is_valid():
     #    note_form.save()
 
-    user_form, address_form, updated = update_billing_address_in_anonymous_checkout(
-        checkout, request.POST or None, request.country
+    user_addresses = (
+        checkout.user.addresses.all() if checkout.user else Address.objects.none()
+    )
+
+    addresses_form, address_form, updated = update_billing_address_in_checkout_with_shipping(  # noqa
+        checkout, user_addresses, request.POST or None, request.country
     )
 
     #if updated:
@@ -96,6 +100,11 @@ def billing(request, checkout):
 
     ctx = get_checkout_context(checkout, request.discounts)
     ctx.update(
-        {"address_form": address_form, "user_form": user_form}
+        {
+            "additional_addresses": user_addresses,
+            "address_form": address_form,
+            "addresses_form": addresses_form,
+            #"note_form": note_form,
+        }
     )
     return TemplateResponse(request, "hobie/billing.html", ctx)
