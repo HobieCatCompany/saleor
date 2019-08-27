@@ -95,8 +95,8 @@ def billing(request, checkout):
         checkout, user_addresses, request.POST or None, request.country
     )
 
-    #if updated:
-    #    return _handle_order_placement(request, checkout)
+    if updated:
+        return redirect("checkout:hobie-payment")
 
     ctx = get_checkout_context(checkout, request.discounts)
     ctx.update(
@@ -108,3 +108,22 @@ def billing(request, checkout):
         }
     )
     return TemplateResponse(request, "hobie/billing.html", ctx)
+
+
+@get_or_empty_db_checkout(Checkout.objects.for_display())
+@validate_voucher
+@validate_checkout
+@add_voucher_form
+def payment(request, checkout):
+    """Display order summary with billing forms for an unauthorized user.
+
+    Will create an order if all data is valid.
+    """
+
+
+    #if updated:
+    #    return _handle_order_placement(request, checkout)
+
+    ctx = get_checkout_context(checkout, request.discounts)
+
+    return TemplateResponse(request, "hobie/payment.html", ctx)
