@@ -13,6 +13,7 @@ from ..checkout.views.discount import add_voucher_form, validate_voucher
 
 from ..checkout.models import Checkout
 from ..core import analytics
+from ..core.utils import get_client_ip
 from ..core.exceptions import InsufficientStock
 from ..core.taxes.errors import TaxError
 from ..discount.models import NotApplicable
@@ -153,11 +154,11 @@ def start_payment(request, checkout):
     with transaction.atomic():
         payment = create_payment(
             gateway='stripe',
-            currency=checkout.total.gross.currency,
+            currency=checkout.get_total().currency,
             email=checkout.email,
             billing_address=checkout.billing_address,
             customer_ip_address=get_client_ip(request),
-            total=checkout.total.gross.amount,
+            total=checkout.get_total().amount,
             checkout=checkout,
             extra_data=extra_data,
         )
