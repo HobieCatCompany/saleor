@@ -18,7 +18,7 @@
   
     <button>Submit Payment</button>
   </form>
-  <form method="post" novalidate class="checkout__shipping">
+  {% comment %}<form method="post" novalidate class="checkout__shipping">
     {% csrf_token %}
     <h2>{% trans "Shipping address" context "Checkout shipping address title" %}</h2>
     
@@ -36,7 +36,7 @@
         {% trans "Continue" context "Checkout shipping address primary action" %}
       </button>
     </div>
-  </form>
+  </form>{% endcomment %}
 {% endblock %}
 {% block footer_scripts %}
 {{ block.super }}
