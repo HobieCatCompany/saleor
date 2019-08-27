@@ -27,5 +27,5 @@ checkout_urlpatterns = [
     #HOBIE below
     url(r"^shipping/", shipping, name="hobie-shipping"),
     url(r"^billing/", billing, name="hobie-billing"),
-    url(r"^payment/", billing, name="hobie-payment"),
+    url(r"^payment/", payment, name="hobie-payment"),
 ]
