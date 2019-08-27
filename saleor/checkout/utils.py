@@ -1183,7 +1183,7 @@ def create_order(*, checkout: Checkout, order_data: dict, user: User) -> Order:
     events.order_created_event(order=order, user=user)
 
     # Send the order confirmation email
-    #send_order_confirmation.delay(order.pk, user.pk) #HOBIE
+    send_order_confirmation.delay(order.pk, user.pk)
     return order
 
 
