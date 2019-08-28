@@ -44,6 +44,7 @@ from ..checkout.views.validators import (
 )
 
 from ..payment import ChargeStatus, TransactionKind, get_payment_gateway
+from ..payment.interface import AddressData
 from ..payment.utils import (
     create_payment,
     create_payment_information,
