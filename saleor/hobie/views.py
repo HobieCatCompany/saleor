@@ -66,12 +66,6 @@ def shipping(request, checkout):
         checkout, request.POST or None, request.country
     )
 
-    if updated:
-        return redirect("checkout:hobie-billing")
-
-    ctx = get_checkout_context(checkout, request.discounts)
-    ctx.update({"address_form": address_form, "user_form": user_form})
-
     discounts = request.discounts
     is_valid_shipping_method(checkout, discounts)
 
@@ -81,9 +75,13 @@ def shipping(request, checkout):
         instance=checkout,
         initial={"shipping_method": checkout.shipping_method},
     )
-    if form.is_valid():
+
+    if updated and form.is_valid():
         form.save()
         return redirect("checkout:hobie-billing")
+
+    ctx = get_checkout_context(checkout, request.discounts)
+    ctx.update({"address_form": address_form, "user_form": user_form})
 
     ctx.update({"shipping_method_form": form})
 
