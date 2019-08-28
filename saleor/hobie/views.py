@@ -163,7 +163,7 @@ def start_payment(request, checkout):
         #):
         #    return redirect(order.get_absolute_url())
 
-        payment_info = create_payment_information(payment, billing_address=checkout.billing_address, shipping_address=checkout.shipping_address)
+        payment_info = create_payment_information(payment, billing_address=AddressData(**checkout.billing_address.as_data()), shipping_address=AddressData(**checkout.shipping_address.as_data()))
         form = payment_gateway.create_form(
             data=request.POST or None,
             payment_information=payment_info,
