@@ -17,6 +17,11 @@ from ..core import analytics
 from ..core.utils import get_client_ip
 from ..core.exceptions import InsufficientStock
 from ..core.taxes.errors import TaxError
+from ..core.taxes import zero_taxed_money
+from ..core.taxes.interface import (
+    calculate_checkout_total,
+)
+
 from ..discount.models import NotApplicable
 from .forms import CheckoutShippingMethodForm
 
@@ -132,14 +137,22 @@ def start_payment(request, checkout):
     payment_gateway, gateway_config = get_payment_gateway('stripe')
     connection_params = gateway_config.connection_params
     extra_data = {"customer_user_agent": request.META.get("HTTP_USER_AGENT")}
+
+    checkout_total = (
+        calculate_checkout_total(checkout=checkout, discounts=request.discounts)
+        - checkout.get_total_gift_cards_balance()
+    )
+
+    checkout_total = max(checkout_total, zero_taxed_money(checkout_total.currency))
+
     with transaction.atomic():
         payment = create_payment(
             gateway='stripe',
-            currency=checkout.get_total().currency,
+            currency=checkout_total.gross.currency,
             email=checkout.email,
             billing_address=checkout.billing_address,
             customer_ip_address=get_client_ip(request),
-            total=checkout.get_total().amount,
+            total=checkout_total.gross.amount,
             checkout=checkout,
             extra_data=extra_data,
         )
