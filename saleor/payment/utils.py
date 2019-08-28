@@ -78,11 +78,17 @@ def create_payment_information(
     """
     billing, shipping = None, None
 
-    if billing_address is None and payment.order.billing_address:
+    if billing_address is None and payment.order and payment.order.billing_address: #HOBIE added "and payment.order"
         billing = AddressData(**payment.order.billing_address.as_data())
 
-    if shipping_address is None and payment.order.shipping_address:
+    if shipping_address is None and payment.order and payment.order.shipping_address: #HOBIE added "and payment.order"
         shipping = AddressData(**payment.order.shipping_address.as_data())
+
+    if billing_address is None and payment.checkout and payment.checkout.billing_address: #HOBIE added 
+        billing = AddressData(**payment.checkout.billing_address.as_data()) #HOBIE added 
+
+    if shipping_address is None and payment.checkout and payment.checkout.shipping_address: #HOBIE added
+        shipping = AddressData(**payment.checkout.shipping_address.as_data()) #HOBIE added 
 
     order_id = payment.order.pk if payment.order else None
 
