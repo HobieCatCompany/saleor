@@ -335,7 +335,7 @@ def generate_request_data_from_checkout(
         lines=lines,
         transaction_token=transaction_token or str(checkout.token),
         address=address.as_data(),
-        customer_code=checkout.user.id if checkout.user else "No User", #HOBIE - changed 0 to "No User"
+        customer_code=checkout.user.id if checkout.user else 0,
         customer_email=checkout.email,
         commit=commit,
         currency=currency,
