@@ -197,7 +197,7 @@ def get_checkout_lines_data(
     for line in lines:
         if not line.variant.product.charge_taxes:
             continue
-        description = line.variant.product.description
+        description = line.variant.display_product() #HOBIE, was line.variant.product.description
         product = line.variant.product
         product_type = line.variant.product.product_type
         tax_code = retrieve_tax_code_from_meta(product)
@@ -335,7 +335,7 @@ def generate_request_data_from_checkout(
         lines=lines,
         transaction_token=transaction_token or str(checkout.token),
         address=address.as_data(),
-        customer_code=checkout.user.id if checkout.user else 0,
+        customer_code=checkout.user.id if checkout.user else "No User", #HOBIE - changed 0 to "No User"
         customer_email=checkout.email,
         commit=commit,
         currency=currency,
