@@ -144,9 +144,9 @@ class NameForm(forms.ModelForm):
         fields = ["first_name", "last_name"]
         labels = {
             "first_name": pgettext_lazy(
-                "Customer form: Given name field", "Given name"
+                "Customer form: Given name field", "First name"
             ),
             "last_name": pgettext_lazy(
-                "Customer form: Family name field", "Family name"
+                "Customer form: Family name field", "Last name"
             ),
         }

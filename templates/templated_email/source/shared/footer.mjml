@@ -11,7 +11,7 @@
   <mj-column>
     <mj-text align="center">
       {% blocktrans trimmed context "Base email footer" %}
-        Sincerely, {{ site_name }}
+        Have a Hobie Day!<br>Questions? Email us at orders@hobie.com.
       {% endblocktrans %}
     </mj-text>
   </mj-column>

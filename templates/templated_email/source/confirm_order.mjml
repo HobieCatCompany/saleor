@@ -11,11 +11,10 @@
     <mj-section>
       <mj-column>
         <mj-text font-size="16px">
-          {% trans "Hi!" context "Standard e-mail greeting" %}
         </mj-text>
         <mj-text>
           {% blocktrans trimmed context "Order confirmation e-mail text" %}
-            Thank you for your order. Below is the list of ordered products. To see your payment details please visit: <a href="{{ order_details_url }}">{{ order_details_url }}</a>
+            Thank you for shopping with us! We are processing your order and will email you as soon as it has shipped. This is typically within 1-2 business days. Below are the details of your hobie.com order:
           {% endblocktrans %}
         </mj-text>
       </mj-column>

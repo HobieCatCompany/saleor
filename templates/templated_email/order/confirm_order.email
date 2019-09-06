@@ -3,14 +3,13 @@
 {% load voucher %}
 
 {% block subject %}
-  {% trans "Order details" context "Order confirmation e-mail subject" %}
+  {% trans "Your Hobie.com Order Confirmation" context "Order confirmation e-mail subject" %}
 {% endblock %}
 
 {% block plain %}
 {% include 'templated_email/shared/_header.email' %}
 {% blocktrans context "Order confirmation e-mail text" %}
-Thank you for your order. Below is the list of ordered products. To see your payment details please visit:
-{{ order_details_url }}{% endblocktrans %}
+Thank you for shopping with us! We are processing your order and will email you as soon as it has shipped. This is typically within 1-2 business days. Below are the details of your hobie.com order:{% endblocktrans %}
 {% for line in order %}
 {{ line.quantity }} x {{ line.product_name }}, {% price line.get_total display_gross=order.display_gross_prices html=False %}
 {% endfor %}
