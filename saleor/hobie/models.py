@@ -6,3 +6,6 @@ class ExportedOrder(models.Model):
     order_id = models.IntegerField()
     created = models.DateTimeField(default=now, editable=False)
 
+    class Meta:
+            managed = False
+
