@@ -44,7 +44,7 @@ def create_csv_row(order, order_line):
         datetime.date.today().strftime('%m/%d/%Y'), #Order Date
         datetime.date.today().strftime('%m/%d/%Y'), #Requested Ship Date
         '09', #Payment terms - 09 - Credit Card
-        {'Standard Ground': 'ECS', 'Express': 'ECE', 'EMS': 'F3P'}[order.shipping_method.name], #EMS is a dummy value, of sorts
+        ('ECS','ECE')["Express" in order.shipping_method.name], #EMS is a dummy value, of sorts
         '', #Ship To Code
         order.billing_address.full_name,
         'ECOM', #Tax Schedule
