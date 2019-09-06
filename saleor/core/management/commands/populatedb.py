@@ -80,7 +80,7 @@ class Command(BaseCommand):
         """
         commands = StringIO()
         for app in apps.get_app_configs():
-            if "saleor" in app.name:
+            if "saleor" in app.name and "hobie" not in app.name:
                 call_command(
                     "sqlsequencereset", app.label, stdout=commands, no_color=True
                 )
