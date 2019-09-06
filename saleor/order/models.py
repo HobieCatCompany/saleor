@@ -136,7 +136,7 @@ class Order(models.Model):
     )
     discount_name = models.CharField(max_length=255, default="", blank=True)
     translated_discount_name = models.CharField(max_length=255, default="", blank=True)
-    display_gross_prices = models.BooleanField(default=True)
+    display_gross_prices = models.BooleanField(default=False) #HOBIE - Changed from True
     customer_note = models.TextField(blank=True, default="")
     weight = MeasurementField(
         measurement=Weight, unit_choices=WeightUnits.CHOICES, default=zero_weight

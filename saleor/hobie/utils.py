@@ -5,11 +5,15 @@ import csv
 from ..order.models import Order, OrderLine
 from .models import ExportedOrder
 
-def get_freight_order_line_dict(freight_amount, tax_amount):
-    return {'line_type':1, 'item_code':'/FECOM', 'quantity':0, 'unit_price':0, 'extended_amount':freight_amount, 'tax_amount':tax_amount, 'sales_gl_account':'4200-595', 'cost_gl_account':''}
+def get_freight_order_line_dict(freight_amount):
+    return {'line_type':5, 'item_code':'/FECOM', 'quantity':0, 'unit_price':0, 'extended_amount':freight_amount, 'sales_gl_account':'4200-595', 'cost_gl_account':''}
+
+def get_tax_order_line_dict(tax_amount):
+    return {'line_type':5, 'item_code':'/AVATAX', 'quantity':0, 'unit_price':0, 'extended_amount':tax_amount, 'sales_gl_account':'2170-505', 'cost_gl_account':''}
 
 def get_item_order_line_dict(order_line):
-    return {'line_type':1, 'item_code':order_line.product_sku, 'quantity':order_line.quantity, 'unit_price':order_line.unit_price_net.amount, 'extended_amount':order_line.get_total().net.amount, 'tax_amount':order_line.get_total().tax.amount, 'sales_gl_account':'4000-190', 'cost_gl_account':'4100-190'}
+    return {'line_type':1, 'item_code':order_line.product_sku, 'quantity':order_line.quantity, 'unit_price':order_line.unit_price_net.amount, 'extended_amount':order_line.get_total().net.amount, 'sales_gl_account':'4000-190', 'cost_gl_account':'4100-190'}
+
 
 def export_orders_ready_to_fulfill_to_csv():
 
@@ -30,7 +34,8 @@ def export_orders_ready_to_fulfill_to_csv():
         if not order.id in previously_exported_order_ids and bool(order.shipping_method):
             for order_line in order.lines.all():
                 writer.writerow(create_csv_row(order, get_item_order_line_dict(order_line)))
-            writer.writerow(create_csv_row(order, get_freight_order_line_dict(order.shipping_price_net.amount, order.shipping_price.tax.amount)))
+            writer.writerow(create_csv_row(order, get_freight_order_line_dict(order.shipping_price_net.amount)))
+            writer.writerow(create_csv_row(order, get_tax_order_line_dict(order.total.tax.amount)))
             if save_exported_orders: ExportedOrder.objects.create(order_id=order.id)
 
     return output.getvalue()
@@ -53,7 +58,6 @@ def create_csv_row(order, order_line):
         order_line['quantity'],
         order_line['unit_price'],
         order_line['extended_amount'],
-        order_line['tax_amount'],
         '', #Comment
         order_line['sales_gl_account'], #Sales G/L Account
         order_line['cost_gl_account'], #Cost G/L Account
