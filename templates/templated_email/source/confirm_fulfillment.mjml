@@ -9,17 +9,16 @@
     <mj-include path="./shared/header.mjml" />
     <mj-section>
       <mj-column>
-        <mj-text font-size="16px">
-          {% trans "Hi!" context "Standard e-mail greeting" %}
-        </mj-text>
         <mj-text>
-          {% blocktrans trimmed context "Fulfillment confirmation email text" %}
-            The items in order #{{ fulfillment.order.pk }} are on the way! Please allow up to 3-6 business days for standard shipping and 2-3 days for expedited. Occasionally we will ship products separately at no additional shipping charge. In the event this happens, you will receive another shipment notification email when the remaining item(s) go out. 
+          {% blocktrans trimmed with order_number=order.pk context "Fulfillment confirmation email text" %}
+            The items in order #{{ order_number }} are on the way! Please allow up to 3-6 business days for standard shipping and 2-3 days for expedited. Occasionally we will ship products separately at no additional shipping charge. In the event this happens, you will receive another shipment notification email when the remaining item(s) go out. 
 Thank you for shopping on Hobie.com!
           {% endblocktrans %}
+        </mj-text>
+        <mj-text>
           {% if fulfillment.tracking_number %}
             {% blocktrans trimmed with tracking_number=fulfillment.tracking_number context "Fulfillment confirmation email text" %}
-              <a href="{{ tracking_number }}">Track Your Package</a>
+              <a href="https://www.fedex.com/apps/fedextrack/?tracknumbers={{ tracking_number }}">Track your package</a> with FedEx tracking number {{ tracking_number }}.
             {% endblocktrans %}
           {% endif %}
         </mj-text>
