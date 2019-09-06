@@ -30,7 +30,7 @@ def export_orders_ready_to_fulfill_to_csv():
         if not order.id in previously_exported_order_ids and bool(order.shipping_method):
             for order_line in order.lines.all():
                 writer.writerow(create_csv_row(order, get_item_order_line_dict(order_line)))
-            writer.writerow(create_csv_row(order, get_freight_order_line_dict(order.shipping_price_net.amount)))
+            writer.writerow(create_csv_row(order, get_freight_order_line_dict(order.shipping_price_net.amount, order.shipping_price.tax.amount)))
             if save_exported_orders: ExportedOrder.objects.create(order_id=order.id)
 
     return output.getvalue()
