@@ -9,7 +9,7 @@ def get_freight_order_line_dict(freight_amount, tax_amount):
     return {'line_type':1, 'item_code':'/FECOM', 'quantity':0, 'unit_price':0, 'extended_amount':freight_amount, 'tax_amount':tax_amount, 'sales_gl_account':'4200-595', 'cost_gl_account':''}
 
 def get_item_order_line_dict(order_line):
-    return {'line_type':1, 'item_code':order_line.product_sku, 'quantity':order_line.quantity, 'unit_price':order_line.unit_price_net.amount, 'extended_amount'order_line.get_total().net.amount, 'tax_amount':order_line.get_total().tax.amount, 'sales_gl_account':'4000-190', 'cost_gl_account':'4100-190'}
+    return {'line_type':1, 'item_code':order_line.product_sku, 'quantity':order_line.quantity, 'unit_price':order_line.unit_price_net.amount, 'extended_amount':order_line.get_total().net.amount, 'tax_amount':order_line.get_total().tax.amount, 'sales_gl_account':'4000-190', 'cost_gl_account':'4100-190'}
 
 def export_orders_ready_to_fulfill_to_csv():
 
