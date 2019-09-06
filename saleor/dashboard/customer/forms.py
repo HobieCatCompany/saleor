@@ -101,10 +101,10 @@ class CustomerForm(forms.ModelForm):
         fields = ["first_name", "last_name", "email", "note", "is_active"]
         labels = {
             "first_name": pgettext_lazy(
-                "Customer form: Given name field", "Given name"
+                "Customer form: Given name field", "First name"
             ),
             "last_name": pgettext_lazy(
-                "Customer form: Family name field", "Family name"
+                "Customer form: Family name field", "Last name"
             ),
             "email": pgettext_lazy("Customer form: email address field", "Email"),
             "note": pgettext_lazy("Customer form: customer note field", "Notes"),
