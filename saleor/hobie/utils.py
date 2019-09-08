@@ -22,21 +22,15 @@ def export_orders_ready_to_fulfill_to_csv():
 
     orders = Order.objects.ready_to_capture().all()
 
-    previously_exported_order_ids = []
-    save_exported_orders = False
-    try:
-        previously_exported_order_ids = list(ExportedOrder.objects.values_list('id', flat=True).order_by('id'))
-        save_exported_orders = True
-    except:
-        pass
+    previously_exported_order_ids = list(ExportedOrder.objects.values_list('id', flat=True).order_by('id'))
 
     for order in orders:
-        if not order.id in previously_exported_order_ids and bool(order.shipping_method):
+        if not order.id in previously_exported_order_ids:
             for order_line in order.lines.all():
                 writer.writerow(create_csv_row(order, get_item_order_line_dict(order_line)))
             writer.writerow(create_csv_row(order, get_freight_order_line_dict(order.shipping_price_net.amount)))
             writer.writerow(create_csv_row(order, get_tax_order_line_dict(order.total.tax.amount)))
-            if save_exported_orders: ExportedOrder.objects.create(order_id=order.id)
+            ExportedOrder.objects.create(order_id=order.id)
 
     return output.getvalue()
 
