@@ -6,7 +6,7 @@
 {{ form.non_field_errors }}
 <form method="post" id="payment-form">
     {% csrf_token %}
-    <h2>{% trans "Payment" context "Checkout shipping address title" %}</h2>
+    <h2>{% trans "Payment Information" context "Checkout shipping address title" %}</h2>
     <div class="form-row">
       <label for="card-element">
         Credit or debit card
@@ -14,12 +14,12 @@
       <div id="card-element" style="width:400px;height:50px;">
         <!-- A Stripe Element will be inserted here. -->
       </div>
-  
+
       <!-- Used to display form errors. -->
       <div id="card-errors" role="alert"></div>
     </div>
-  
-    <button class="btn btn-primary">Place Your Order</button>
+
+    <button class="btn btn-primary mt-3">Place Your Order</button>
   </form>
 {% endblock %}
 {% block footer_scripts %}

@@ -42,3 +42,4 @@ django-queries-results.html
 # Hobie Overrides
 !/saleor/hobie/assets/compiled/*
 config.codekit3
+*.codekit3

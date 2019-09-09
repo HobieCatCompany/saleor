@@ -38,8 +38,8 @@
     {% endif %}
   </div>
 
-    <h2>{% trans "Shipping address" context "Checkout shipping address title" %}</h2>
-    
+    <h2 class="mt-5">{% trans "Shipping address" context "Checkout shipping address title" %}</h2>
+
     <div class="checkout__addresses{{ request.user.is_authenticated|yesno:",--full-width" }}">
       {% if request.user.is_authenticated %}
         {% include "checkout/snippets/addresses_form.html" with addresses_form=user_form addresses=additional_addresses address_form=address_form only %}
@@ -49,7 +49,7 @@
       {% endif %}
     </div>
 
-    <div class="checkout__addresses">
+    <div class="checkout__addresses mt-4">
       <button type="submit" class="btn btn-primary">
         {% trans "Continue" context "Checkout shipping address primary action" %}
       </button>
