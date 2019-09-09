@@ -379,7 +379,7 @@ def get_order_tax_data(
         lines=lines,
         transaction_token=order.token,
         address=address.as_data(),
-        customer_code=order.user.id if order.user else None,
+        customer_code=order.user.id if order.user else 0,
         customer_email=order.user_email,
         commit=commit,
         currency=order.total.currency,
