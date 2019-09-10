@@ -36,7 +36,7 @@ def export_orders_ready_to_fulfill_to_csv():
 
 def create_csv_row(order, order_line):
     return [
-        order.id,
+        '', # Web Order ID - If we were to use the order id from this, it might conflict with dealer orders.
         'ECOMSA', #Customer Number
         '001', #Warehouse Code
         order.id, #Purchase Order Number
