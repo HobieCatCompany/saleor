@@ -114,44 +114,6 @@
                         {# ACCESSORIES #}
                         <li><a class="dropdown-item disabled" href="#"><strong>{% trans "ACCESSORIES" %}</strong></a></li>
                         <li><a class="dropdown-item" href="/shop/products/category/accessories-1/">{% trans "View All" %}</a></li>
-                        <div class="dropdown-divider"></div>
-                        {# Saleor Account Links #}
-                        <li><a class="dropdown-item disabled" href="#"><strong>{% trans "ACCOUNT" %}</strong></a></li>
-                        {% if user.is_authenticated %}
-                          {% if user.is_staff or request.impersonator.is_staff %}
-                            <li>
-                              <a href="{% url "dashboard:index" %}" class="dropdown-item" target="_blank" rel="noopener">
-                                {% trans "Dashboard" context "Main navigation item" %}
-                              </a>
-                            </li>
-                          {% endif %}
-                          <li>
-                            <a href="{% url "account:details" %}" class="dropdown-item">
-                              {% trans "Your account" context "Main navigation item" %}</a>
-                          </li>
-                          {% if user.is_impersonate %}
-                            <li>
-                              <a href="{% url "impersonate-stop" %}" class="dropdown-item">
-                                {% trans 'Stop impersonating' context 'Main navigation item' %}
-                              </a>
-                            </li>
-                          {% else %}
-                            <li>
-                              <a href="{% url "account:logout" %}" class="dropdown-item">
-                                {% trans "Log out" context "Main navigation item" %}</a>
-                            </li>
-                          {% endif %}
-                        {% else %}
-                          <li>
-                            <a rel="nofollow" href="{% url "account:signup" %}" class="dropdown-item">
-                              {% trans "Register" context "Main navigation item" %}</a>
-                          </li>
-                          <li>
-                            <a rel="nofollow" href="{% url "account:login" %}" class="dropdown-item">
-                              {% trans "Log in" context "Main navigation item" %}
-                            </a>
-                          </li>
-                        {% endif %}
                     </ul>
                 </li>
             </ul>
