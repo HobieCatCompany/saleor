@@ -180,7 +180,7 @@ def start_payment(request, checkout):
                 form.add_error(None, str(exc))
             else:
                 order = _handle_order_placement(request, checkout)
-                transaction.on_commit(lambda: send_order_confirmation.delay(order.pk, user.pk))
+                transaction.on_commit(lambda: send_order_confirmation.delay(order.pk))
                 return redirect("order:payment-success", token=order.token)
 
     client_token = payment_gateway.get_client_token(config=gateway_config)
