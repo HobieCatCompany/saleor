@@ -3,24 +3,24 @@
 {% load bootstrap_form from bootstrap4 %}
 
 {% block forms %}
-{{ form.non_field_errors }}
 <form method="post" id="payment-form">
     {% csrf_token %}
     <h2>{% trans "Payment Information" context "Checkout shipping address title" %}</h2>
-    <div class="form-row">
-      <label for="card-element">
-        Credit or debit card
-      </label>
-      <div id="card-element" style="width:400px;height:50px;">
+    <div class="form-group">
+      <label for="card-element" class="text-uppercase"><strong>Credit or Debit Card</strong></label>
+      <div id="card-element" class="form-control rounded-lg" style="width: 80%; height: 3rem; padding-top: .9rem;">
         <!-- A Stripe Element will be inserted here. -->
       </div>
 
-      <!-- Used to display form errors. -->
-      <div id="card-errors" role="alert"></div>
+      <!-- Used to display CC payment form input errors -->
+      <div id="card-errors" class="font-weight-bold mt-3" style="color: red;" role="alert"></div>
+
+      <!-- Used to display CC payment non-form input errors (i.e. credit card declined etc.) -->
+      <div id="card-process-errors" class="font-weight-bold mt-3" style="color: red;">{{ form.non_field_errors }}</div>
     </div>
 
     <button class="btn btn-primary mt-3">Place Your Order</button>
-  </form>
+</form>
 {% endblock %}
 {% block footer_scripts %}
 {{ block.super }}

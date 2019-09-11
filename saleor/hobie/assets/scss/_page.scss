@@ -138,3 +138,11 @@ section.page-image-header {
 .form-control, input, select {
     border-radius: 0;
 }
+
+// ...
+#card-process-errors {
+    ul {
+        padding: 0;
+        list-style-type: none;
+    }
+}

@@ -32,3 +32,8 @@ hr {
     margin-top: 0.2rem;
     margin-left: -1.35rem;
 }
+
+// Bootstrap 4 text and background utilities overrides
+.bg-primary {
+    background-color: $button-blue !important;
+}
