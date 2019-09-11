@@ -14,16 +14,13 @@
 {% block flyout_cart %}{% endblock flyout_cart %}
 
 {% block content %}
-  <div class="row checkout__thankyoupage">
-    <div class="col-xl-10 m-auto">
-      {# Saleor checkout image hidden #}
-      <img class="checkout__thankyoupage__parrot lazyload lazypreload d-none" data-src="{% static 'images/confirm-order-bg.png' %}"
-           data-srcset="{% static 'images/confirm-order-bg.png' %} 1x, {% static 'images/confirm-order-bg2x.png' %} 2x">
-      <h1>{% blocktrans trimmed with order_url=order.get_absolute_url context "Checkout title" %}
+  <div class="row">
+    <div class="col">
+      <h1 class="text-center mt-3">{% blocktrans trimmed with order_url=order.get_absolute_url context "Checkout title" %}
           Thank you for your <a href="{{ order_url }}" style="text-decoration: underline; color: #363436;">order</a>!
       {% endblocktrans %}</h1>
 
-      <p>{% blocktrans trimmed with order_url=order.get_absolute_url context "Checkout text" %}
+      <p class="text-center">{% blocktrans trimmed with order_url=order.get_absolute_url context "Checkout text" %}
         We've sent a confirmation email with details to <span style="color: inherit;">{{ email }}</span>.<br>
         In case of any problems or questions please <a href="mailto:orders@hobie.com">contact us</a>.
       {% endblocktrans %}</p>
