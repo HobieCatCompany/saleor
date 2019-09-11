@@ -1183,7 +1183,7 @@ def create_order(*, checkout: Checkout, order_data: dict, user: User) -> Order:
     events.order_created_event(order=order, user=user)
 
     # Send the order confirmation email
-    send_order_confirmation.delay(order.pk, user.pk)
+    #send_order_confirmation.delay(order.pk, user.pk) #HOBIE commented out.  Moved this call into hobie.views.start_payment because of some transaction handling issues.
     return order
 
 
