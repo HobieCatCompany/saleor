@@ -21,8 +21,8 @@
       {% endblocktrans %}</h1>
 
       <p class="text-center">{% blocktrans trimmed with order_url=order.get_absolute_url context "Checkout text" %}
-        We've sent a confirmation email with details to <span style="color: inherit;">{{ email }}</span>.<br>
-        In case of any problems or questions please <a href="mailto:orders@hobie.com">contact us</a>.
+        We've sent a confirmation email with your order details to <span style="color: inherit;">{{ email }}</span>.<br>
+        If you have any questions, please <a href="mailto:orders@hobie.com">contact us</a>.
       {% endblocktrans %}</p>
       <!--<div class="row checkout__thankyoupage__form">
         <div class="col-md-6 push-md-6">
