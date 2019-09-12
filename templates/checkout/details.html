@@ -93,7 +93,7 @@
         <div class="row checkout__review__section">
           <div class="col-8">
             <h3>{% trans "Total" context "Order review section title" %}</h3>
-            {# <span style="font-size: 80%; color: #7b7b7b;">Shipping &amp; taxes calculated at checkout</span> #}
+            <span id="order-review-taxship-disclaimer" style="font-size: 80%; color: #7b7b7b;">Shipping &amp; taxes calculated at checkout</span>
           </div>
           <div class="col-4">
             <h3 class="float-right">{% price checkout_total.gross %}</h3>
