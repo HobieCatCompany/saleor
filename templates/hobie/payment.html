@@ -2,6 +2,14 @@
 {% load i18n %}
 {% load bootstrap_form from bootstrap4 %}
 
+{% block stylesheet %}
+<style>
+#order-review-taxship-disclaimer {
+    display: none;
+}
+</style>
+{% endblock stylesheet %}
+
 {% block forms %}
 <form method="post" id="payment-form">
     {% csrf_token %}
