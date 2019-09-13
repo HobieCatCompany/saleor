@@ -20,7 +20,6 @@
                     <strong>
                       {{choice}}
                     </strong>
-                    <div>{% if 'Express' in choice.name %}2-3 Business Days{% else %}3-6 Business Days{% endif %}</div>
                   </div>
                 </div>
               </label>
@@ -57,3 +56,7 @@
     </div>
   </form>
 {% endblock %}
+{% block footer_scripts %}
+{{ block.super }}
+<script type="text/javascript"></script>
+{% endblock footer_scripts %}
