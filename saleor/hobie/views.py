@@ -98,6 +98,7 @@ def shipping(request, checkout):
 @get_or_empty_db_checkout(Checkout.objects.for_display())
 @validate_voucher
 @validate_checkout
+@validate_shipping_method
 @add_voucher_form
 def billing(request, checkout):
     """Display order summary with billing forms for an unauthorized user.
@@ -134,6 +135,7 @@ def billing(request, checkout):
 @get_or_empty_db_checkout(Checkout.objects.for_display())
 @validate_voucher
 @validate_checkout
+@validate_shipping_method
 @add_voucher_form
 def start_payment(request, checkout):
     payment_gateway, gateway_config = get_payment_gateway('stripe')
@@ -148,6 +150,11 @@ def start_payment(request, checkout):
     checkout_total = max(checkout_total, zero_taxed_money(checkout_total.currency))
 
     with transaction.atomic():
+
+        for p in checkout.payments.all():
+            p.is_active=False
+            p.save()
+
         payment = create_payment(
             gateway='stripe',
             currency=checkout_total.gross.currency,
