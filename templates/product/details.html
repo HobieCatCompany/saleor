@@ -208,3 +208,18 @@
     </div>
   </div>
 {% endblock content %}
+
+{% block footer_scripts %}
+{{ block.super }}
+<script type="text/javascript">
+// Show alert message by updating add to cart button copy when someone adds an item to their cart (helps mobile users know something has happened)
+$('body').on('click', '.product__info__button button', function() {
+    // Update button copy
+    $(this).html('Added!');
+    // After 2.8 seconds reload page to reset button copy & cart count
+    setTimeout(function() {
+        window.location.reload(false);
+    }, 2800);
+});
+</script>
+{% endblock footer_scripts %}
