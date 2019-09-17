@@ -57,9 +57,9 @@
         <th>
           {% trans "SKU" context "Shipment order table header" %}
         </th>
-        <th class="right-align">
+        <!--<th class="right-align">
           {% trans "Tax rate" context "Shipment order table header" %}
-        </th>
+        </th>-->
         <th class="right-align">
           {% trans "Gross price" context "Shipment order table header" %}
         </th>
@@ -80,19 +80,19 @@
             <td>
               {{ line.product_sku }}
             </td>
-            <td class="right-align">
+            <!--<td class="right-align">
               {% blocktrans with tax_rate=line.tax_rate context "Order line tax rate value" %}
                 {{ tax_rate }} %
               {% endblocktrans %}
-            </td>
+            </td>-->
             <td class="right-align">
-              {% price line.unit_price.gross %}
+              {% price line.unit_price.net %}
             </td>
             <td class="right-align">
               {{ line.quantity }}
             </td>
             <td class="right-align">
-              {% price line.get_total.gross %}
+              {% price line.get_total.net %}
             </td>
           </tr>
         {% endfor %}
@@ -107,7 +107,7 @@
           {% trans "Subtotal" context "Order subtotal net price" %}
         </td>
         <td class="right-align">
-          {% price order.get_subtotal.gross %}
+          {% price order.get_subtotal.net %}
         </td>
       </tr>
       <tr>
@@ -115,7 +115,7 @@
           {% trans "Shipping" context "Order total shipping price header" %} {% if order.shipping_method_name %}({{ order.shipping_method_name }}){% endif %}
         </td>
         <td class="right-align">
-          {% price order.shipping_price.gross %}
+          {% price order.shipping_price.net %}
         </td>
       </tr>
       <tr>
