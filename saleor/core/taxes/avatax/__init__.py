@@ -242,7 +242,7 @@ def get_order_lines_data(order: "Order") -> List[Dict[str, str]]:
             amount=line.unit_price_net.amount * line.quantity,
             tax_code=tax_code,
             item_code=line.variant.sku,
-            description=line.variant.product.description,
+            description=line.variant.display_product() #HOBIE, was line.variant.product.description
         )
     if order.discount_amount and order.discount_amount.amount:
         append_line_to_data(
