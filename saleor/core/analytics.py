@@ -68,7 +68,7 @@ def get_view_payloads(path, language, headers):
 
 
 def report_view(client_id, path, language, headers):
-    payloads = get_view_payloads(path, language, headers)
+    payloads = list(get_view_payloads(path, language, headers)) #HOBIE from https://github.com/mirumee/saleor/pull/3615/files
     extra_headers = {}
     user_agent = headers.get("HTTP_USER_AGENT", None)
     if user_agent:
