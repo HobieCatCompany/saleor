@@ -9,6 +9,15 @@
 <html lang="{{ LANGUAGE_CODE }}" class="no-js" data-shipping-options-url="{% url 'checkout:shipping-options' %}" data-checkout-summary-url="{% url 'checkout:dropdown' %}">
 <head>
   <title>{% block title %}{{ site.name }}{% endblock %}</title>
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-W6VGQB');</script>
+  <!-- End Google Tag Manager -->
+
   {% block meta %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,6 +33,11 @@
       <link rel="alternate" hreflang="{{ lang_code }}" href="{% translate_url url=request.path lang_code=lang_code %}" />
     {% endfor %}
   {% endblock meta %}
+
+  {# Domain Verification #}
+  <meta property="fb:admins" content="100009585822541" />
+  <meta name="google-site-verification" content="GaITWYmMBi4oSQGjygDJA8TQpzTYG4CCJjmG5jE81ic" />
+  <meta name="google-site-verification" content="sCgzN4ajnrjYVXMxY0waG4wfHUQWsmzy5x_VCVKo8Us" />
 
   {% include 'favicon.html' %}
   {% render_bundle 'storefront' 'css' attrs='async' %}
@@ -55,6 +69,11 @@
 </head>
 
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W6VGQB"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
 {# Site main header and nav bar #}
 {% block header %}
 <header>
@@ -101,6 +120,9 @@
                     {# Shop drop-down menu items #}
                     <ul class="dropdown-menu">
                         {# Saleor Category Links #}
+                        {# SHOP ALL LINK #}
+                        <li><a class="dropdown-item" href="/shop/" style="color: #6c757d;"><strong>{% trans "SHOP ALL" %}</strong></a></li>
+                        <div class="dropdown-divider"></div>
                         {# MENS #}
                         <li><a class="dropdown-item disabled" href="#"><strong>{% trans "MENS" %}</strong></a></li>
                         <li><a class="dropdown-item" href="/shop/products/category/mens-apparel-2/">{% trans "Apparel" %}</a></li>
@@ -110,6 +132,10 @@
                         <li><a class="dropdown-item disabled" href="#"><strong>{% trans "WOMENS" %}</strong></a></li>
                         <li><a class="dropdown-item" href="/shop/products/category/womens-apparel-7/">{% trans "Apparel" %}</a></li>
                         <li><a class="dropdown-item" href="/shop/products/category/womens-sunglasses-6/">{% trans "Sunglasses" %}</a></li>
+                        <div class="dropdown-divider"></div>
+                        {# HATS #}
+                        <li><a class="dropdown-item disabled" href="#"><strong>{% trans "HATS" %}</strong></a></li>
+                        <li><a class="dropdown-item" href="/shop/products/category/hats-4/">{% trans "View All" %}</a></li>
                         <div class="dropdown-divider"></div>
                         {# ACCESSORIES #}
                         <li><a class="dropdown-item disabled" href="#"><strong>{% trans "ACCESSORIES" %}</strong></a></li>
@@ -289,48 +315,31 @@
           <div class="col-lg-6 footer-links">
               {# Pill nav #}
               <ul class="nav nav-pills" role="tablist">
-                  {# Shortcuts #}
+                  {# Customer Service #}
                   <li class="nav-item">
-                      <a href="#footer-shortcuts" class="nav-link" data-toggle="tab" role="tab">{% trans "Shortcuts" %}</a>
+                      <a href="#footer-customerservice" class="nav-link" data-toggle="tab" role="tab">{% trans "Customer Service" %}</a>
                   </li>
-                  {# Hobie Sites #}
+                  {# More Info (legal) #}
                   <li class="nav-item">
-                      <a href="#footer-hobie-sites" class="nav-link" data-toggle="tab" role="tab">{% trans "Hobie Sites" %}</a>
-                  </li>
-                  {# Legal #}
-                  <li class="nav-item">
-                      <a href="#footer-legal" class="nav-link" data-toggle="tab" role="tab">{% trans "Legal" %}</a>
+                      <a href="#footer-moreinfo" class="nav-link" data-toggle="tab" role="tab">{% trans "More Info" %}</a>
                   </li>
               </ul>
               {# Pill boxes #}
               <div class="tab-content">
-                  {# Shortcuts #}
-                  <div id="footer-shortcuts" class="tab-pane fade pl-3" role="tabpanel">
+                  {# Customer Service #}
+                  <div id="footer-customerservice" class="tab-pane fade pl-3 mt-0" role="tabpanel">
                       <ul class="list-unstyled">
-                          <li><a href="https://www.hobie.com/dealers/" class="small">Find a Dealer</a></li>
-                          <li><a href="https://www.hobie.com/forums/" class="small">Forums</a></li>
-                          <li><a href="https://www.hobie.com/support/" class="small">Product Support</a></li>
-                          <li><a href="https://www.hobie.com/product-registration/" class="small">Product Registration</a></li>
-                          <li><a href="https://www.hobie.com/jobs/" class="small">Employment Opportunities</a></li>
-                          <li><a href="https://www.hobie.com/contact-us/" class="small">Contact Us</a></li>
+                          <li><a href="https://www.hobie.com/shop-frequently-asked-questions/" class="small">FAQ</a></li>
+                          <li><a href="https://www.hobie.com/shop-shipping/" class="small">Shipping</a></li>
+                          <li><a href="https://www.hobie.com/shop-returns/" class="small">Returns</a></li>
                       </ul>
                   </div>
-                  {# Hobie Sites #}
-                  <div id="footer-hobie-sites" class="tab-pane fade pl-3" role="tabpanel">
-                      <ul class="list-unstyled">
-                          <li><a href="http://www.hobiesurfshop.com/" target="_blank" class="small">Hobie Surf Shop</a></li>
-                          <li><a href="http://www.hobiepolarized.com/" target="_blank" class="small">Hobie Polarized Sunglasses</a></li>
-                      </ul>
-                  </div>
-                  {# Legal #}
-                  <div id="footer-legal" class="tab-pane fade pl-3" role="tabpanel">
+                  {# More Info (legal) #}
+                  <div id="footer-moreinfo" class="tab-pane fade pl-3 mt-0" role="tabpanel">
                       <ul class="list-unstyled">
                           <li><a href="https://www.hobie.com/terms-of-use/" class="small">Terms of Use</a></li>
                           <li><a href="https://www.hobie.com/privacy-policy/" class="small">Privacy Policy</a></li>
                           <li><a href="https://www.hobie.com/ip/" class="small">Intellectual Property</a></li>
-                          <li><a href="https://www.hobie.com/shop-frequently-asked-questions/" class="small">Shop - FAQ</a></li>
-                          <li><a href="https://www.hobie.com/shop-shipping/" class="small">Shop - Shipping</a></li>
-                          <li><a href="https://www.hobie.com/shop-returns/" class="small">Shop - Returns</a></li>
                       </ul>
                   </div>
               </div>
