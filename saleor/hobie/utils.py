@@ -22,7 +22,7 @@ def export_orders_ready_to_fulfill_to_csv():
 
     orders = Order.objects.ready_to_capture().all()
 
-    previously_exported_order_ids = list(ExportedOrder.objects.values_list('id', flat=True).order_by('id'))
+    previously_exported_order_ids = list(ExportedOrder.objects.values_list('order_id', flat=True).order_by('order_id'))
 
     for order in orders:
         if not order.id in previously_exported_order_ids:
