@@ -129,10 +129,17 @@ header.shrink {
     }
 }
 
-// Reposition & restyle "where to buy" link when in mobile menu mode
+// Reposition & restyle "where to buy" link & reduce Hobie script logo in nav when in mobile menu mode
 @media screen and (max-width: 991px) {
     header {
         nav {
+            .navbar-brand {
+                margin: 0;
+                img {
+                    width: auto;
+                    height: 29px;
+                }
+            }
             .where-to-buy {
                 top: auto;
                 bottom: 15px;
