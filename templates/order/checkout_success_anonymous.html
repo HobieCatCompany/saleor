@@ -12,7 +12,7 @@
   window.dataLayer = window.dataLayer || [];
   dataLayer.push({
      'transactionId': '{{ order.pk }}',
-     'transactionTotal': {{ order.total.gross.amount }},
+     'transactionTotal': {{ order.total.gross.amount }}
   });
   </script>
 {% endblock data_layer %}
