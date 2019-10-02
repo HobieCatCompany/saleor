@@ -2,18 +2,22 @@
 $(document).ready(function() {
     // Get header/nav bar height on page load
     var header_height = $('header').height();
-    $(window).scroll(function() {
-        // When page scrolls past the height of the header/nav bar init shrink mode & show where to buy footer tab
-        if ($(document).scrollTop() > header_height) {
-            $('header').addClass('fixed-top shrink animated slideInDown');
-            $('#where-to-buy-tab').removeClass('d-none').addClass('animated slideInUp');
-        }
-        // Return things to normal once the page is scrolled back to top
-        else {
-            $('header').removeClass('fixed-top shrink animated slideInDown');
-            $('#where-to-buy-tab').addClass('d-none').removeClass('animated slideInUp');
-        }
-    });
+    var window_width = $('html').width();
+    // Only apply "shrink and fixed nav states" to desktop browsers
+    if (window_width > 991) {
+        $(window).scroll(function() {
+            // When page scrolls past the height of the header/nav bar init shrink mode & show where to buy footer tab
+            if ($(document).scrollTop() > header_height) {
+                $('header').addClass('fixed-top shrink animated slideInDown');
+                $('#where-to-buy-tab').removeClass('d-none').addClass('animated slideInUp');
+            }
+            // Return things to normal once the page is scrolled back to top
+            else {
+                $('header').removeClass('fixed-top shrink animated slideInDown');
+                $('#where-to-buy-tab').addClass('d-none').removeClass('animated slideInUp');
+            }
+        });
+    }
 });
 
 // Make Bootstrap's dropdown component multi-level aware (i.e. can contain sub-menus or sub-sub-menus)
