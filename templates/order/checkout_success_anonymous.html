@@ -7,6 +7,16 @@
 
 {% block title %}{% trans "Thank you" context "Checkout success page title" %} — {{ block.super }}{% endblock %}
 
+{% block data_layer %}
+<script>
+  window.dataLayer = window.dataLayer || [];
+  dataLayer.push({
+     'transactionId': '{{ order.pk }}',
+     'transactionTotal': {{ order.total.gross.amount }},
+  });
+  </script>
+{% endblock data_layer %}
+
 {# Hide Hobie shop logo (empty block) #}
 {% block hobie_shop_logo %}{% endblock hobie_shop_logo %}
 
