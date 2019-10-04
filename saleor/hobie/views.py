@@ -54,7 +54,7 @@ from ..payment.utils import (
 
 def export_orders_to_csv(request):
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment;filename="hobie_cat_orders.csv"'
+    response['Content-Disposition'] = 'attachment;filename="hobie_cat_ecommerce_orders.csv"'
     response.content = export_orders_ready_to_fulfill_to_csv()      
 
     if len(response.content) == 0:
