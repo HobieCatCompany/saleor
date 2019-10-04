@@ -103,6 +103,13 @@ header {
     }
 }
 
+// Saleor "shop" nav item overrides
+li.shop-menu {
+    & > a {
+        color: #f8f709 !important;
+    }
+}
+
 // Global header/nav bar - SHRINK MODE OVERRIDES
 header.shrink {
     nav {
