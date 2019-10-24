@@ -15,11 +15,11 @@ Thank you for shopping on Hobie.com!
 {% if fulfillment.tracking_number %}
 {% if fulfillment.tracking_number|length == 22 %}
 {% blocktrans trimmed with tracking_number=fulfillment.tracking_number context "Fulfillment confirmation email text" %}
-Track your package with USPS tracking number <a href="https://tools.usps.com/go/TrackConfirmAction?tLabels={{ tracking_number }}">{{ tracking_number }}</a>.
+Track your package with USPS tracking number {{ tracking_number }}.
 {% endblocktrans %}
 {% else %}
 {% blocktrans trimmed with tracking_number=fulfillment.tracking_number context "Fulfillment confirmation email text" %}
-Track your package with FedEx tracking number <a href="https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber={{ tracking_number }}">{{ tracking_number }}</a>.
+Track your package with FedEx tracking number {{ tracking_number }}.
 {% endblocktrans %}
 {% endif %}
 {% endif %}
