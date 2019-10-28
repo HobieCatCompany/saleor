@@ -10,29 +10,21 @@
     <mj-section>
       <mj-column>
         <mj-text>
-          {% blocktrans trimmed with order_number=order.pk context "Fulfillment confirmation email text" %}
-            The items in order #{{ order_number }} are on the way! Please allow up to 3-6 business days for standard shipping and 2-3 days for expedited. Occasionally we will ship products separately at no additional shipping charge. In the event this happens, you will receive another shipment notification email when the remaining item(s) go out. 
+            The items in order #{{ order.pk }} are on the way! Please allow up to 3-6 business days for standard shipping and 2-3 days for expedited. Occasionally we will ship products separately at no additional shipping charge. In the event this happens, you will receive another shipment notification email when the remaining item(s) go out. 
 Thank you for shopping on Hobie.com!
-          {% endblocktrans %}
         </mj-text>
         <mj-text>
           {% if fulfillment.tracking_number %}
             {% if fulfillment.tracking_number|length == 22 %}
-            {% blocktrans trimmed with tracking_number=fulfillment.tracking_number context "Fulfillment confirmation email text" %}
-              <a href="https://tools.usps.com/go/TrackConfirmAction?tLabels={{ tracking_number }}">Track your package</a> with USPS tracking number {{ tracking_number }}.
-            {% endblocktrans %}
+              <a href="https://tools.usps.com/go/TrackConfirmAction?tLabels={{ fulfillment.tracking_number }}">Track your package</a> with USPS tracking number {{ fulfillment.tracking_number }}.
             {% else %}
-            {% blocktrans trimmed with tracking_number=fulfillment.tracking_number context "Fulfillment confirmation email text" %}
-              <a href="https://www.fedex.com/apps/fedextrack/?tracknumbers={{ tracking_number }}">Track your package</a> with FedEx tracking number {{ tracking_number }}.
-            {% endblocktrans %}
+              <a href="https://www.fedex.com/apps/fedextrack/?tracknumbers={{ fulfillment.tracking_number }}">Track your package</a> with FedEx tracking number {{ fulfillment.tracking_number }}.
             {% endif %}
           {% endif %}
         </mj-text>
         <mj-text>
           {% if digital_lines %}
-            {% blocktrans trimmed context "Fulfillment digital products email text" %}
               You can download your digital products by clicking in download link(s).
-            {% endblocktrans %}
           {% endif %}
         </mj-text>
       </mj-column>

@@ -1,26 +1,18 @@
 {% load i18n %}
 
 {% block subject %}
-  {% blocktrans trimmed with order=fulfillment.order context "Fulfillment confirmation email subject" %}
     Your Hobie.com Order Has Shipped
-  {% endblocktrans %}
 {% endblock %}
 
 {% block plain %}
 {% include 'templated_email/shared/_header.email' %}
-{% blocktrans context "Fulfillment confirmation email text" %}
 The items in order #{{ order.pk }}  are on the way! Please allow up to 3-6 business days for standard shipping and 2-3 days for expedited. Occasionally we will ship products separately at no additional shipping charge. In the event this happens, you will receive another shipment notification email when the remaining item(s) go out. 
 Thank you for shopping on Hobie.com!
-{% endblocktrans %}
 {% if fulfillment.tracking_number %}
 {% if fulfillment.tracking_number|length == 22 %}
-{% blocktrans trimmed with tracking_number=fulfillment.tracking_number context "Fulfillment confirmation email text" %}
-Track your package with USPS tracking number {{ tracking_number }}.
-{% endblocktrans %}
+Track your package with USPS tracking number {{ fulfillment.tracking_number }}.
 {% else %}
-{% blocktrans trimmed with tracking_number=fulfillment.tracking_number context "Fulfillment confirmation email text" %}
-Track your package with FedEx tracking number {{ tracking_number }}.
-{% endblocktrans %}
+Track your package with FedEx tracking number {{ fulfillment.tracking_number }}.
 {% endif %}
 {% endif %}
 

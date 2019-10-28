@@ -13,9 +13,7 @@
         <mj-text font-size="16px">
         </mj-text>
         <mj-text>
-          {% blocktrans trimmed context "Order confirmation e-mail text" %}
             Thank you for shopping with us! We are processing your order (#{{ order.pk }}) and will email you as soon as it has shipped. This is typically within 1-2 business days. Below are the details of your hobie.com order:
-          {% endblocktrans %}
         </mj-text>
       </mj-column>
     </mj-section>

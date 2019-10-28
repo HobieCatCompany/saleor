@@ -70,3 +70,11 @@ def create_csv_row(order, order_line):
         order.shipping_address.country_area,
         order.shipping_address.country.code,
     ]
+
+
+def send_test_emails():
+    order_id = 13076
+    fulfillment_id = 21
+    from saleor.order.emails import send_order_confirmation, send_fulfillment_confirmation
+    send_order_confirmation(order_id)
+    send_fulfillment_confirmation(order_id, fulfillment_id)
