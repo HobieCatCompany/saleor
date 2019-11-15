@@ -207,19 +207,41 @@
       </table>
     </div>
   </div>
+
+  {# Shop Size Charts Modal #}
+  <div class="modal fade" id="size-charts-modal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Size Charts</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <img src="{{ STATIC_URL }}hobie/images/shop-size-charts.jpg" />
+          </div>
+        </div>
+      </div>
+  </div>
 {% endblock content %}
 
 {% block footer_scripts %}
 {{ block.super }}
 <script type="text/javascript">
-// Show alert message by updating add to cart button copy when someone adds an item to their cart (helps mobile users know something has happened)
-$('body').on('click', '.product__info__button button', function() {
-    // Update button copy
-    $(this).html('Added!');
-    // After 2.8 seconds reload page to reset button copy & cart count
-    setTimeout(function() {
-        window.location.reload(false);
-    }, 2800);
+$(document).ready(function() {
+    // Show alert message by updating add to cart button copy when someone adds an item to their cart (helps mobile users know something has happened)
+    $('body').on('click', '.product__info__button button', function() {
+        // Update button copy
+        $(this).html('Added!');
+        // After 2.8 seconds reload page to reset button copy & cart count
+        setTimeout(function() {
+            window.location.reload(false);
+        }, 2800);
+    });
+
+    // Override Saleor "variant picker" field label and add "size chart" modal link in addition to base text
+    $('div.variant-picker__label').html('<span>Size</span><span class="pl-5"><a href="#" data-toggle="modal" data-target="#size-charts-modal" style="color: #828282;">Size Charts</a></span>');
 });
 </script>
 {% endblock footer_scripts %}
