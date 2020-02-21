@@ -43,3 +43,6 @@ django-queries-results.html
 !/saleor/hobie/assets/compiled/*
 config.codekit3
 *.codekit3
+
+#Environments
+saleor_env/
