@@ -12,35 +12,75 @@ export default class AttributeSelectionWidget extends Component {
 
   handleChange = (attrPk, valuePk) => {
     this.props.handleChange(attrPk.toString(), valuePk.toString());
-  }
+  };
 
+ 
   render() {
     const { attribute, selected } = this.props;
-    return (
-      <div className="variant-picker">
-        <div className="variant-picker__label">{attribute.name}</div>
-        <div className="btn-group" data-toggle="buttons">
-          {attribute.values.map((value, i) => {
-            const active = selected === value.pk.toString();
-            const labelClass = classNames({
-              'btn btn-secondary variant-picker__option': true,
-              'active': active
-            });
-            return (
-              <label
-                className={labelClass}
-                key={i}
-                onClick={() => this.handleChange(attribute.pk, value.pk)}>
-                <input
-                  defaultChecked={active}
-                  name={value.pk}
-                  type="radio"/>
-                {value.name}
-              </label>
-            );
-          })}
-        </div>
+    if (attribute.name ==='Size') {
+      return (
+        <div className="variant-picker">
+  
+      <div className="variant-picker__label">
+        <span>
+          {attribute.name}
+          </span>
+          <span className="pl-5">
+            <a href='#' data-toggle="modal" data-target="#size-charts-modal">Size Chart </a>
+          </span>
       </div>
-    );
+          <div className="btn-group" data-toggle="buttons">
+            {attribute.values.map((value, i) => {
+              const active = selected === value.pk.toString();
+              const labelClass = classNames({
+                'btn btn-secondary variant-picker__option': true,
+                'active': active
+              });
+              return (
+                <label
+                  className={labelClass}
+                  key={i}
+                  onClick={() => this.handleChange(attribute.pk, value.pk)}>
+                  <input
+                    defaultChecked={active}
+                    name={value.pk}
+                    type="radio"/>
+                  {value.name}
+                </label>
+              );
+            })}
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="variant-picker" >
+  
+          <div className="variant-picker__label">{attribute.name} </div>
+          <div className="btn-group" data-toggle="buttons">
+            {attribute.values.map((value, i) => {
+              const active = selected === value.pk.toString();
+              const labelClass = classNames({
+                'btn btn-secondary variant-picker__option': true,
+                'active': active
+              });
+              return (
+                <label
+                  className={labelClass}
+                  key={i}
+                  onClick={() => this.handleChange(attribute.pk, value.pk)}>
+                  <input
+                    defaultChecked={active}
+                    name={value.pk}
+                    type="radio"/>
+                  {value.name}
+                </label>
+              );
+            })}
+          </div>
+        </div>
+      );
+    }
+    
   }
 }
